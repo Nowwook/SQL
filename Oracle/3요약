@@ -1,0 +1,212 @@
+SELECT * from tab 		테이블에서 전체 출력
+DESC departents 		구성보기
+order by salary desc 	salary 기준 오름차순 정렬 (+ 내림차순)
+distinct A 		중복제거(nul까지 구분)
+where 		 	조건
+
+Column = 열
+Record = 행
+@@@@@@@@@@@@@연산자
+
+where not job='SALESMAN' AND DEPTNC=30;
+and, or, not, <, >, <=, >=, =
+!= ( <> , ^= 같은뜻)
+
+﻿in ('A','B') 		A,B 포함 된
+
+sal between 최소 and 최대 	범위
+
+like 문자열 검색
+_ 	문자 1개
+% 	길이 상관없는 문자데이터
+ename like 'S%'; 	S~
+ename like '_S%'; 	ㅁS~
+ename like '%A%'; 	~A~
+
+등가비교 연산자 null
+comm is NULL 	is 대신 = 틀림
+	
+@@@@@@@@@@@@@@@집합
+
+union 	합
+union all 	합 (중복 포함)
+minus  	빼기
+intersect 	교집합
+
+upper()	대문자
+lower()	소문자
+initcap() 	첫글자만 대문자
+
+length()	문자열 길이
+lengthb()	바이트수 (한글 1글자 3byte)
+
+from dual	더미 테이블
+
+substr(데이터,시작자리,추출개수)	문자열 일부추출 
+음수는 뒷자리부터, 개수 안적으면 >끝까지
+
+instr('반갑습니다 오라틀','오') 	특정문자 위치 (빈칸 포함)
+
+replace('문자열','변경할 단어','원하는 단어')
+
+lpad('oracle',총 자리수,'빈자리 채우기')		왼쪽빈자리	
+rpad('oracle',10,'#')				오른쪽
+
+empno || '/' || ename	문자결합
+
+trim	공백제거
+rtrim	우
+ltrim	좌
+
+@@@@@@@@@@@@@@@@숫자 데이터
+
+round(1234.5678,0) 	반올림
+trunc(1234.5678,2) 		자름
+
+ceil(3.14) 	반 올림
+floor(3.14) 	반 내림
+
+mod(15,6)	나머지
+
+sysdate 		오늘 날짜
+getdate (sql server)
+sysdate-1 	어제
+
+add_months(sysdate,3) 		3달후
+months_between(hiredate,sysdate)	날짜간 차이
+last_day('22 06/05')			달의 마지막 날짜 (/ ' ' - , 다가능)
+
+       round(sysdate,'cc'),
+       round(sysdate,'yyyy')
+       trunc(sysdate,'q'),
+       trunc(sysdate,'ddd'),
+       trunc(sysdate,'HH')
+
+'500' 자료형 타입 변환
+
+TO_CHAR(sysdate,'yyyy mm/dd hh24:mi:ss P.M.')
+
+여러 언어로 날짜출력
+TO_CHAR(SYSDATE,'mon','NLS_DATE_LANGUAGE = JAPANESE')
+
+TO_CHAR(sal,'$999,999')	달러
+TO_CHAR(sal,'L999,999.00') 	원
+TO_NUMBER('1,300','9999')	문자 >> 숫자 
+
+문자 >> 날짜
+TO_DATE('2018 +07-04','yyyy/mm/dd')
+
+NVL(comm,0) 		(아닐때,null일때)
+NVL2(comm,'O','X') 	 (데이터가,아닐때,null일때)
+
+DECODE(job,		     조건	
+           'MANAGER',  sal*1.1,
+           'SALESMAN', SAL*1.05,
+           'ANALYST',   SAL,
+           SAL*1.03) 
+
+case
+    when comm is null then '해당 X'
+    when comm = 0    then '수당 X'
+    when comm > 0    then '수당 : ' || comm	(|| = +)
+    end   
+
+@@@@@@@@@@@@@@@@@@@다중행 함수, 데이터 그룹화
+
+count(*)  max(sal)  min(sal)  sum(sal)  avg(sal)
+
+count(*) 		(null 제외) 행 합 (distinct 사용시 포함)
+sum(*)		(null 제외) 열 합 (distinct 사용시 포함)
+	
+ **group by** 
+그룹 순서 주의
+조건 검색 having
+
+rollup	(a,b)(b,a) 다름
+cube	(a,b)(b,a) 같음
+
+컬럼별 그룹화
+group by grouping sets (deptno,job)
+
+﻿grouping 	전체합 Data 인지, ROLLUP, CUBE에 의해서 산출된 Data 인지 구분
+grouping(deptno), grouping(job)
+
+DECODE 문으로 grouping 함수 적용
+DECODE(grouping(deptno),
+            1,'All_DEPT',
+	deptno)
+
+listagg		그룹에 속해있는 데이터를 가로로 나열
+listagg(ename,',')
+
+pivot 	행>>열
+unpivot 	열>>행
+select * from (select 가로,세로,값 from emp)
+ 	pivot(이 값을
+	       for ﻿이 테이블 속 in (이 값을 각 열로 해서 출력))
+﻿
+decode 문을 활용하여 pivot 구현 (귀찮)
+ max(decode(job,'CLERK',sal)) as CLERK
+
+@@@@@@@@@@@@@@@@@@@@조인
+
+곱형식
+select * from emp,dept;
+
+조건 조인
+select * from emp,dept
+where emp.deptno = dept.deptno;
+
+테이블 이름 (한칸 띄워서)별칭
+emp e, dept d  ,  e.deptno = d.deptno;
+중복되는 테이블은 .으로 표시
+e.deptno
+
+비등가조인 
+select * from emp e, salgrade s
+where e.sal between s.losal and s.hisal;  # losal<sal<hisal 데이터만
+
+자체 조인
+e1.ename,e2.ename
+emp e1, emp e2
+
+null 값에 대한 데이터 유실
+left join	, right join
+e1.mgr = e2.empno(+)
+
+NATURAL JOIN 
+where 없이 자동, .구분x인거
+
+INLINE VIEW
+select e10.empno,e10.ename,e10.deptno,d.dname,d.loc
+from (select * from emp where deptno=10) e10,
+       (select * from dept) d
+where e10.deptno=d.deptno;
+
+with		(인라인뷰 변수화)선언후 참조가능
+E10 as (),
+D   as ()
+select e10.empno,e10.ename,e10.deptno,d.dname,d.loc
+from E10,D
+where E10.deptno=D.deptno;
+
+@@@@@@@@@@@@@@@@SubQuery
+
+결과 행 반환
+
+any()  , some()  , all()
+exists() 	결과값이 존재하면 모두출력
+
+-SELECT 절에서 사용 	> 스칼라 서브 쿼리, 1개행 반환
+ SELECT (SELECT dname FROM dept WHERE E.deptno =dept.deptno) FROM emp E;
+
+-FROM 절에서 사용 	> 인라인 뷰, 임시 테이블, join 가능
+
+-WHERE , HAVING 절	> 중첩 서브 쿼리, 다중 행을 반환
+
+다중열 서브쿼리 
+in 으로 매칭
+where (deptno,sal) in (elect deptno,max(sal) from emp group by deptno);
+
+﻿with 구문		선언 후 참조 가능﻿
+E as ()

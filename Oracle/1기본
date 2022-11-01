@@ -1,0 +1,63 @@
+다운후 서비스에서 실행확인
+
+hr(연습용)계정을 오픈하는 방법 (중요)
+- cmd 관리자권한으로 실행 > sqlplus > system,비번 > alter user hr identified by hr account unlock; > conn hr/hr
+
+- cmd 일반실행
+- sqlplus 
+- sqlplus system/패스워드
+- CONN hr/hr
+- exit 
+
+글꼴, 행번호
+도구 > 환경설정 > 코드편집기
+
+DML(Data Manipulation Language)	    select, insert, update, delete  
+DDL(Data Definition Language)	      create, alter, drop, rename, truncate
+TCL(Transaction Control Language)	  commit, rollback, savepoint
+DCL(Data Control Language)		      grant, revoke
+
+daemon 프로그램
+백그라운드에서 동작, 서비스 요청이 오면 동작
+
+SQLDeveloper 
+오라클 서버에 접속해서 SQL 퀴리 명령어 수행하는 프로그램
+
+주석 #, rem
+데이터 속 내용만 대소문자 구별
+"" 
+'' VARCHAR 유형 가져올때
+
+
+==============데이터 타입=============
+CHAR(n)	 	고정길이 문자 / 최대 2000byte / 디폴트 값 1byte 
+VARCHAR2(n)	가변길이 문자 / 최대 4000byte / 디폴트 값 1byte 
+NCHAR(n)	고정길이 유니코드 문자(다국어 가능) / 최대 2000byte / 디폴트 값 1byte 
+NVARCHAR(n)	가변길이 유니코드 문자(다국어 가능) / 최대 2000byte / 디폴트 값 1byte 
+
+LONG 	최대 2GB 크기의 가변길이 문자형 
+CLOB	대용량 텍스트 데이터 타입(최대 4Gbyte)
+NCLOB	대용량 텍스트 유니코드 데이터 타입(최대 4Gbyte)
+
+NUMBER(P,S) 	가변숫자 / P (1 ~ 38, 디폴트 : 38) / S (-84 ~ 127, 디폴트 값 : 0)  / 최대 22byte 
+FLOAT(P)	 	NUMBER의 하위타입 / P (1~128 .디폴트 : 128) / 이진수 기준 / 최대 22byte 
+BINARY_FLOAT	32비트 부동소수점 수 / 최대 4byte 
+BINARY_DOUBLE	64비트 부동소수점 수 / 최대 8byte 
+
+DATE	 	BC 4712년 1월 1일부터 9999년 12월 31일, 연, 월, 일, 시, 분, 초 까지 입력 가능 
+TIMESTAMP 	연도, 월, 일, 시, 분, 초 + 밀리초까지 입력가능 
+
+CLOB 	문자형 대용량 객체 고정길이와 가변길이 문자집합 지원 
+NCLOB 	유니코드를 지원하는 문자형 대용량 객체 
+BLOB 	이진형 대용량 객체 
+BFILE 	대용량 이진 파일에 대한 위치,이름 저장
+==================================
+
+문자열 숫자 덧셈 불가
+'ABCD'+empno  #ERROR
+
+'1300'- 1500
+'1,300' - 1500  에러
+
+연산순위 not > and > or
+

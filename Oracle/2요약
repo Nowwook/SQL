@@ -1,0 +1,154 @@
+CREATE TABLE 이름(		테이블 생성
+    EMPNO    NUMBER(자리수),
+    ENAME    VARCHAR2(10)
+);
+
+DESC 이름			구성, 형식확인 
+
+commit;				저장 ( 실행시 롤백 안됨)
+rollback				되돌리기
+
+INSERT INTO 이름(EMPNO,ENAME)	데이터 추가
+	 VALUES(1,'길동');		공백은 null
+
+DROP TABLE 이름;			테이블 제거
+
+CREATE TABLE 이름 AS SELECT * FROM DEPT;	테이블 복사
+			 + WHERE 1<>1;	테이블 구조복사
+
+UPDATE 이름 SET deptno = 60 WHERE loc=upper('seoul'); 	업데이트(전체아니면 조건 걸기)
+
+delete from 이름 where deptno=60;	삭제
+
+트랜잭션
+﻿commit, rollback 되는 구간 묶음
+
+####################### 테이블 변경 ALTER  (***자동 COMMIT***)
+
+ADD			컬럼 추가
+ALTER TABLE emp_arter
+ADD hp VARCHAR2(20);
+
+RENAME COLUMN TO	컬럼 이름변경
+ALTER TABLE emp_arter
+RENAME COLUMN hp TO tel; 
+
+MODIFY			컬럼 자료형 변경
+ALTER TABLE emp_arter
+MODIFY empno number(5);
+
+DROP COLUMN		컬럼 삭제
+ALTER TABLE emp_arter
+DROP COLUMN tel;
+
+RENAME A TO B		테이블 이름변경
+RENAME emp_arter TO emp_rename;
+
+TRUNCATE TABLE		테이블 구조 남기고 삭제
+TRUNCATE TABLE emp_rename;
+
+
+############################ 규칙에 맞는 순번 생성 >> 시퀀스
+
+CREATE SEQUENCE 시퀀스이름		시퀀스 생성 
+    INCREMENT BY 10	10씩 증가
+    START WITH 10		시작값
+    MAXVALUE 90		최대
+    MINVALUE 0		최소
+    CYCLE 		최댓값 넘었을 때 반복인지
+    CACHE 2;		
+
+SELECT * FROM USER_SEQUENCES;		시퀀스 쿼리로 확인
+
+INSERT INTO 테이블이름			시퀀스 이용 데이터 삽입
+VALUES (시퀀스이름.NEXTVAL,'DATABASE','SEOUL'); 
+시퀀스이름.NEXTVAL 가 규칙따라 증가
+
+가장 마지막으로 생성된 시퀀스번호 확인 
+SELECT seq_dept_sequence.CURRVAL FROM DUAL;
+
+ALTER SEQUENCE seq_dept_sequence		시퀀스 옵션수정
+    INCREMENT BY 3
+    MAXVALUE 99
+    NOCYCLE;
+
+##########################################
+@@@@@@	 제약(CONSTRAINT) 조건 @@@@@@
+
+1. 영역 무결성(domain integrity) : 
+	열에 저장되는 값의 적정 여부를 확인, 
+	적절한 형식의 데이터, 
+	NULL 여부와 가은 정해 놓은 범위를 만족하는 데이터임을 규정
+
+2. 개체 무결성(entity integrity) : 
+	테이블 데이터를 유일하게 식별할 수 있는 기본키는 반드시 값을 가지고 있어야 하며 
+	NULL 이 될수 없고 중복될수 없다
+
+3. 참조 무결성(referential integrity) : 
+	참조 테이터블의 외래키 값은 테이블의 기본키로서 존재해야 하며 NULL 이 가능
+
+@@@@@@ 	제약조건 확인   	@@@@@@@
+
+OWNER			제약조건 소유 계정
+
+CONSTRAINT_NAME	제약조건 이름(지정 안하면 DBMS가 자동 지정)
+
+CONSTRAINT_TYPE	C : 	C : CHECK, NOT NULL 
+			U : UNIQUE		중복x, null 중복가능
+			P : PRIMARY KEY		not null+unique
+			R : FOREIGN KEY		REFERENCES
+
+TABLE_NAME		제약조건 지정한 테이블 이름(대문자)
+
+##########################################
+
+*조회
+SELECT OWNER,CONSTRAINT_NAME,CONSTRAINT_TYPE,TABLE_NAME
+FROM USER_CONSTRAINTS;
+
+*제약조건 이름 지정
+CONSTRAINT 조건이름 NOT NULL
+CONSTRAINT 조건이름 NOT NULL(login_id)
+
+*제약조건 추가
+ALTER TABLE 테이블 이름
+MODIFY ( tel NOT NULL );
+
+*이미 이름이 생성된 제약조건 이름변경
+ALTER TABLE 테이블 이름
+RENAME CONSTRAINT a TO b; 
+
+*제약조건 삭제
+ALTER TABLE 테이블 이름
+DROP CONSTRAINT b;
+
+*FOREIGN KEY 	
+CONSTRAINT 제약이름 REFERENCES 참조 테이블(참조 열)
+-참조하면 삭제 등등 순서대로
+ ON DELETE CASCADE 참조 된거 같이 삭제
+ ON DELETE SET NULL 삭제시 참조값 NULL
+
+CHECK		데이터 범위, 형태 지정
+CHECK( LENGTH( LOGIN_PWD ) > 3 )
+
+DEFAULT		안 넣은 값 자동 지정
+DEFAULT '123456'
+
+################################### 사용자
+사용자 만들기
+CREATE USER orclstudy IDENTIFIED BY ORACLE;
+
+권한 부여
+GRANT CREATE SESSION TO orclstudy;
+
+계정에 권한 부여
+GRANT CREATE SYNONYM TO hr;
+GRANT CREATE PUBLIC SYNONYM TO hr;
+
+동의어 생성
+CREATE SYSNONYM e FOR emp;
+
+모든 사용자 조회
+SELECT *FROM ALL_USERS;
+SELECT *FROM DBA_USERS;
+SELECT *FROM DBA_OBJECTS;
