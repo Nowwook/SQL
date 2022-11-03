@@ -1,4 +1,23 @@
+as
+- 이름 정의
+- select문 에서만 생략가능
+- as 안쓰고 뛰워쓰기시 "이름"
+
 nologging
 - alter table A nologging;
 - buffer cache 라는 메모리 영역을 생략하고 기록
 - 로그파일 기록 최소화하여 성능 향상
+
+CONCAT('str1', 'str2', ...);
+- 여러 문자열 하나로 합치기
+
+like 에서 escape'_' 
+- _ 문자취급
+
+rownum ~
+- 데이터 추출
+- rownum<x 이면 1~x
+
+NULL
+- oracle 에선 최댓값
+- sever 에선 최솟값
