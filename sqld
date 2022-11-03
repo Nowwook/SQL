@@ -21,3 +21,25 @@ rownum ~
 NULL
 - oracle 에선 최댓값
 - sever 에선 최솟값
+
+NVL(컬럼1, X ) 		        (아닐때,null일때)
+ISNULL(컬럼1,NULL일때)
+NVL2(컬럼1,'O','X') 	    (데이터가,아닐때,null일때)
+nullif(컬럼1,컬럼2)       컬럼1=컬럼2 면 null
+COALESCE(표현식1, 표현식2, ...)       임의의 개수 표현식에서 NULL이 아닌 최초의 표현식
+
+order by 
+- 가장 마지막 연산
+- 기존 테이블에서 연산
+- 성능 저하
+
+merge into (변경할)테이블1
+using 비교테이블2
+  on (조건)
+when matched then
+  update
+  delete
+when not matched then
+  insert()
+  values()
+
