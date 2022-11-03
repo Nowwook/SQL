@@ -1,0 +1,4 @@
+nologging
+- alter table A nologging;
+- buffer cache 라는 메모리 영역을 생략하고 기록
+- 로그파일 기록 최소화하여 성능 향상
