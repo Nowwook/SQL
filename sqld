@@ -43,5 +43,10 @@ when not matched then
   insert()
   values()
   
-  count(*) = count(1)
+  count(*) = count(1) 
+  count(*) 거짓이면 0
+  
+  연산 순서
+ 산술(+-*/) > 연결(||) > 비교(<>=>) > isnull,like,in > between > not > and > or
+ from > wherre > group > having > select > order
 
