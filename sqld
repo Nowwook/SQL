@@ -45,7 +45,7 @@ when not matched then
   values()
   
   count(*) = count(1) 
-  count(*) 거짓이면 0
+  count(*) 조건절(where)이 거짓이면 0
   
   연산 순서
  산술(+-*/) > 연결(||) > 비교(<>=>) > isnull,like,in > between > not > and > or
