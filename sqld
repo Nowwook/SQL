@@ -19,6 +19,7 @@ rownum ~
 - rownum<x 이면 1~x
 
 NULL
+- 조건에서 is null 이라고 적은게 아니면 조건이 없는것
 - oracle 에선 최댓값
 - sever 에선 최솟값
 
