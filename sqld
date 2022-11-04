@@ -53,3 +53,11 @@ when not matched then
 
 순수관계 연산자
 - select, project, join, divide
+
+순위
+- rank()        12245
+- dense_rank()  12234
+- row_number()  12345
+- ntile(4)      전체를 1~4등으로 나눔
+- partition by  특정 속성별
+                
