@@ -51,3 +51,5 @@ when not matched then
  산술(+-*/) > 연결(||) > 비교(<>=>) > isnull,like,in > between > not > and > or
  from > wherre > group > having > select > order
 
+순수관계 연산자
+- select, project, join, divide
