@@ -25,7 +25,7 @@ NULL
 NVL(컬럼1, X ) 		        (아닐때,null일때)
 ISNULL(컬럼1,NULL일때)
 NVL2(컬럼1,'O','X') 	    (데이터가,아닐때,null일때)
-nullif(컬럼1,컬럼2)       컬럼1=컬럼2 면 null
+nullif(컬럼1,컬럼2)       컬럼1=컬럼2 면 null 아니면 컬럼1
 COALESCE(표현식1, 표현식2, ...)       임의의 개수 표현식에서 NULL이 아닌 최초의 표현식
 
 order by 
@@ -42,4 +42,6 @@ when matched then
 when not matched then
   insert()
   values()
+  
+  count(*) = count(1)
 
