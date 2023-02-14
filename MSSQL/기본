@@ -1,0 +1,41 @@
+-- USE
+현재 사용하는 데이터베이스를 지정
+
+
+-- GO
+go~go 명령어 사이에있는 SQL문을 하나의 트랜잭션으로 묶어 실행하는 기능
+
+ex) 
+SELECT 'BATCH 1' AS '1';
+go
+SELECT 'BATCH 2' AS '2';
+go 2
+전체 실행시 1은 1번 2는 2번실행
+
+  
+-- DECLARE
+변수선언
+
+ex) X 라는 이름의 int형 변수를 선언해서 값을 대입하고 출력
+DECLARE @X INT;
+SET @X = 10;
+SELECT @X;
+
+DECLARE @Name VARCHAR(50),
+        @Age  INT,
+        @ID   VARCHAR(50) = 'me';   여러개 가능, 값 할당가능
+
+ex) 테이블도 가능
+DECLARE @T_TABLE TABLE (
+  ID      INT         NOT NULL,
+  NAME    VARCHAR(10) NOT NULL,
+  PRIMARY KEY(ID)
+)
+
+조회된 결과를 TABLE 변수에 INSERT
+INSERT INTO @T_TABLE
+SELECT ID, NAME
+FROM T_STUDENT
+
+조회
+SELECT * FROM @T_TABLE
