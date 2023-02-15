@@ -1,7 +1,7 @@
 ORDER BY, GROUP BY 서브쿼리를 개선하기 위해 나온 함수
 
 그룹을 지어주기보다는 행의 범위를 지정해주는 의미에 좀 더 가깝다
-GROUP BY절은 결과 행 개수에 영향을 미치지만 OVER절은 영향을 미치지 않는다
+PARTITION BY 는 GROUP BY와는 달리 기존 행의 세세한 정보들은 사라지지 않고 그대로 유지, 기존의 데이터와 집계된 값 다 표시
 
 ex) sum,rank 등을 전체가 아닌 날짜별로 할때 
 SUM(수량) OVER(ORDER BY 날짜)
@@ -14,3 +14,4 @@ COUNT(*)OVER()                               : 전체행 카운트
 AVG(컬럼)OVER(PARTITION BY 컬럼)              : 그룹내 평균
 STDDEV(컬럼)OVER(PARTITION BY 컬럼)           : 그룹내 표준편차
 RATIO_TO_REPORT(컬럼)OVER(PARTITION BY 컬럼)  : 현재행값 / SUM(그룹행값) ,100곱하면 %
+
