@@ -1,0 +1,16 @@
+Oracle에서 NVL 은
+MSSQL 에선 ISNULL
+
+ISNULL(컬럼명, 대체값)
+
+WHERE절에서 NULL 값의 컬럼을 조회
+컬럼 IS NULL or ISNULL(컬럼, 대체값) = 대체값
+
+NVL2 는 없음 대체용 IIF
+IIF(컬럼명 IS NULL, null일때, 아닐때)
+
+
+캐이스로 구별가능
+CASE WHEN 컬럼명 IS NULL 
+            THEN null일때
+            ELSE 아닐때
