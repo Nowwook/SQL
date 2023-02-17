@@ -1,0 +1,32 @@
+이전 행 값 (LAG)
+다음 행 값 (LEAD)
+
+ex) 매장의 날짜별 수익, 전날 수익, 다음날 수익
+SELECT Date AS 날짜,
+  LAG(money) OVER(ORDER BY 날짜) AS 전날 수익,
+  money AS 오늘 수익,
+  LEAD(money) OVER(ORDER BY 날짜) AS 다음날 수익
+FROM 매출
+WHERE 매장 = '카페'
+ORDER BY Date
+
+ex) 오늘 수익률
+SELECT Date AS 날짜,
+  money/LAG(money) OVER(ORDER BY 날짜) -1 AS 오늘 수익률
+FROM 매출
+WHERE 매장 = '카페'
+ORDER BY Date
+
+n 번째 전 값 가져오기
+LAG("컬럼명", n)
+LEAD ("컬럼명", n)
+
+NULL인 경우 대체 값 m
+LAG("컬럼명", n, m)
+LEAD ("컬럼명", n, m)
+
+
+그룹별 이전행, 다음행
+LAG(sal) OVER(PARTITION BY job ORDER BY job, sal) 
+LEAD(sal) OVER(PARTITION BY job ORDER BY job, sal) 
+
