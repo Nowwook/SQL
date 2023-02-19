@@ -1,0 +1,62 @@
+ASCII()
+    첫문자의 ASCII 코드 값
+CHAR()
+    싱글 바이트 문자로 반환
+CHARINDEX(n,)
+    n의 위치
+CONCAT(,, ...)
+    둘 이상의 문자열 연결, 조인
+CONCAT_WS()
+
+DIFFERENCE()
+
+FORMAT()
+
+LEFT(,n)
+    왼쪽에서 n개
+LEN()
+    문자열 길이
+LOWER()
+    소문자로
+LTRIM()
+    선행공백 제거
+NCHAR()
+
+PATINDEX()
+
+QUOTENAME()
+
+REPLACE(,n,m)
+    n문자를 m으로 변환
+REPLICATE(,n)
+    n번 반복
+REVERSE()
+    반전
+RIGHT(,n)
+    오른쪽에서 n개
+RTRIM()
+    후행공백 제거
+SOUNDEX()
+
++ SPACE(n) +
+    n번 공백
+STR()
+    정수 > 문자
+STRING_AGG()
+
+STRING_ESCAPE()
+
+STRING_SPLIT()
+
+STUFF()
+
+SUBSTRING(,n,m)
+    n번부터 m개
+TRANSLATE()
+
+TRIM()
+
+UNICODE()
+
+UPPER()
+    대문자로
