@@ -9,9 +9,9 @@ CONCAT(,, ...)
 CONCAT_WS()
 
 DIFFERENCE()
-
-FORMAT()
-
+    SOUNDEX() 값의 차이를 측정 0~4
+FORMAT(n,m,)
+    n을 날짜,소숫점 형식변경
 LEFT(,n)
     왼쪽에서 n개
 LEN()
@@ -21,9 +21,9 @@ LOWER()
 LTRIM()
     선행공백 제거
 NCHAR()
-
-PATINDEX()
-
+    정수 코드에 해당하는 유니코드 문자를 반환
+PATINDEX(n,m)
+    m에서 n위치, (%_ 사용)
 QUOTENAME()
 
 REPLACE(,n,m)
@@ -37,7 +37,7 @@ RIGHT(,n)
 RTRIM()
     후행공백 제거
 SOUNDEX()
-
+    문자의 음성표현을 가지는 문자열을 반환(한글 동작 안함)
 + SPACE(n) +
     n번 공백
 STR()
