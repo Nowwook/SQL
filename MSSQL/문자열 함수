@@ -52,11 +52,11 @@ STUFF(n,m,o,p)
     n문자열의 m번째부터 o개 없앤 사이에 p를 넣기
 SUBSTRING(,n,m)
     n번부터 m개
-TRANSLATE()
-
+TRANSLATE(n,m,o)
+    n문자열의 m을 o으로 대체, m과o의 길이는 같음
 TRIM()
-
+    앞뒤공백 제거
 UNICODE()
-
+    첫글자를 유니코드로 
 UPPER()
     대문자로
