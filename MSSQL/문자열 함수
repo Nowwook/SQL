@@ -46,10 +46,10 @@ STRING_AGG(n,m)
     n컬럼의 값을 구분자(m)으로 합침, GROUP BY 절과 함께 사용
 STRING_ESCAPE(n,'json')
     json에 사용할 문자열 값을 Escape 처리
-STRING_SPLIT()
-
-STUFF()
-
+STRING_SPLIT(n,'m',1)
+    m구분자로 n자르기, 1적으면 서순
+STUFF(n,m,o,p)
+    n문자열의 m번째부터 o개 없앤 사이에 p를 넣기
 SUBSTRING(,n,m)
     n번부터 m개
 TRANSLATE()
