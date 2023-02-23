@@ -1,0 +1,57 @@
+SQL문을 저장해 놓고 필요할 때마다 호출해서 사용하는 방식
+
+
+기본문법
+
+CREATE PROCEDURE 사용할이름
+AS
+BEGIN
+원하는 쿼리
+END
+
+
+매개변수 받기
+- ( ) 로 매개변수를 지정
+- 매개변수를 리턴받기 위해서는 타입옆에 OUTPUT
+
+CREATE PROCEDURE Schema_Name.Procedure_Name
+(
+  @site NVARCHAR(500)
+  ,@name NVARCHAR(100)
+,@ret INT OUTPUT
+)
+AS
+BEGIN
+SELECT @site
+END
+
+수정하기 위해서는 CREATE 를 ALTER 로 변경
+
+
+조회
+sp_helptext '이름'
+
+
+삭제
+DROP PROCEDURE 이름
+
+
+
+호출
+- 매개변수 없으면
+exec 이름
+
+- 매개변수 있으면
+변수를 선언 및 값을 할당한 후 SP 호출에서 사용
+
+DECLARE @site NVARCHAR(500)
+DECLARE @name NVARCHAR(100)
+DECLARE @ret  INT
+ 
+SET @site = 'tistory.com'
+SET @name = 'mozi'
+
+- OUTPUT 변수는 호출 시 값을 리턴받아서 사용
+exec Schema_Name.Procedure_Name @site, @name, @ret
+ 
+SELECT @ret
