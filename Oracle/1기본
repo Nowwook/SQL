@@ -35,6 +35,9 @@ VARCHAR2(n)	가변길이 문자 / 최대 4000byte / 디폴트 값 1byte
 NCHAR(n)	고정길이 유니코드 문자(다국어 가능) / 최대 2000byte / 디폴트 값 1byte 
 NVARCHAR(n)	가변길이 유니코드 문자(다국어 가능) / 최대 2000byte / 디폴트 값 1byte 
 
+char	속도 
+varchar	메모리
+
 LONG 	최대 2GB 크기의 가변길이 문자형 
 CLOB	대용량 텍스트 데이터 타입(최대 4Gbyte)
 NCLOB	대용량 텍스트 유니코드 데이터 타입(최대 4Gbyte)
