@@ -61,3 +61,7 @@ BFILE 	대용량 이진 파일에 대한 위치,이름 저장
 
 연산순위 not > and > or
 
+oracle 은 select,from 이 필수기 때문에 from이 없을땐 dual 사용
+ex) SELECT SYSDATE FROM DUAL;
+
+
