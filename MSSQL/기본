@@ -39,3 +39,5 @@ FROM T_STUDENT
 
 조회
 SELECT * FROM @T_TABLE
+
+oracle 과 달리 begin tran 사용 안하면 자동 커밋
