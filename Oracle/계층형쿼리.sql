@@ -1,4 +1,4 @@
-# 1) 일반 조인을 사용한 계층형 쿼리
+
 SELECT bom1.item_name,
        bom1.item_id,
        bom2.item_name parent_item
