@@ -22,5 +22,5 @@ FROM bom
 START WITH parent_id IS NULL 
 CONNECT BY PRIOR item_id = parent_id;
 
-본체의 PARENT_ID는 부모노드인 컴퓨터의 ITEM_ID와 연결되므로 PRIOR키워드는 PARENT가 아닌 ITEM_ID앞
+--본체의 PARENT_ID는 부모노드인 컴퓨터의 ITEM_ID와 연결되므로 PRIOR키워드는 PARENT가 아닌 ITEM_ID앞
 
