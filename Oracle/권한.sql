@@ -19,3 +19,8 @@ SELECT *FROM DBA_OBJECTS;
 #END;    
 
 select * from EMP ;
+
+
+CREATE USER 계정이름 IDENTIFIED BY PASSWORD;    -- 계정 생성
+GRANT CONNECT, RESOURCE TO 계정이름;            -- grant 부여할 권한 to 계정이름
+REVOKE CONNECT, RESOURCE FROM 계정이름;         -- revoke 제거할 권한 from 계정이름
