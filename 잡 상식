@@ -1,2 +1,4 @@
 WHERE a NOT IN (SELECT a FROM b);
 NOT IN 속 a에 null 값이 있다면 모든 조건이 거짓 = 리턴 안함
+
+GROUPING SETS(A,B,C) = GROUP BY A UNION ALL GROUP BY B UNION ALL GROUP BY C
