@@ -27,6 +27,6 @@ REVOKE CONNECT, RESOURCE FROM 계정이름;         -- revoke 제거할 권한 f
 
 
 -- 권한 그룹 
-CREATE ROLE 롤_이름;           -- 롤이 생성
+CREATE ROLE 롤_이름;           -- 롤 생성
 GRANT CONNECT TO 롤_이름;      -- 롤에 권한 부여
 GRANT 롤_이름 TO 계정이름;      -- 롤에 계정 넣기
