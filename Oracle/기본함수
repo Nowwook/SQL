@@ -116,6 +116,11 @@ case
 count(*)  max(sal)  min(sal)  sum(sal)  avg(sal)
 
 count(*) 		(null 제외) 행 합 (distinct 사용시 포함)
+
+COUNT(*) 
+  OVER (ORDER BY SAL
+  RANGE BETWEEN 50 PRECEDING AND 150 FOLLOWING)		현재 행의 값을 기준으로 파티션 내에서 –50 에서 +150 범위를 카운트
+
 sum(*)		(null 제외) 열 합 (distinct 사용시 포함)
 	
  **group by** 
@@ -128,7 +133,7 @@ cube	(a,b)(b,a) 같음
 컬럼별 그룹화
 group by grouping sets (deptno,job)
 
-﻿grouping 	전체합 Data 인지, ROLLUP, CUBE에 의해서 산출된 Data 인지 구분
+grouping 	전체합 Data 인지, ROLLUP, CUBE에 의해서 산출된 Data 인지 구분
 grouping(deptno), grouping(job)
 
 DECODE 문으로 grouping 함수 적용
@@ -141,10 +146,9 @@ listagg(ename,',')
 
 pivot 	행>>열
 unpivot 	열>>행
-select * from (select 가로,세로,값 from emp)
- 	pivot(이 값을
-	       for ﻿이 테이블 속 in (이 값을 각 열로 해서 출력))
-﻿
+select * from (select 원본 테이블)
+ 	pivot(집계함수 for 기준열 in (기준열 값))
+
 decode 문을 활용하여 pivot 구현 (귀찮)
  max(decode(job,'CLERK',sal)) as CLERK
 
