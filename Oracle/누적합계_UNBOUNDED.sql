@@ -1,3 +1,4 @@
+/*
 SUM(컬럼명) OVER( PARTITION BY [컬럼] ORDER BY [컬럼] [ASC/DESC]
   ROWS / RANGE
   BETWEEN UNBOUNDED PRECEDING / PRECEDING / CURRENT ROW
@@ -8,7 +9,7 @@ RANGE : 논리적인 주소에 의해 행 집합을 지정
 UNBOUNDED PRECEDING : 윈도우의 시작 위치가 첫번째 ROW
 UNBOUNDED FOLLOWING : 윈도우의 마지막 위치가 마지막 ROW
 CURRENT ROW : 윈도우의 시작 위치가 현재 ROW
-          
+*/         
           
 SELECT SAL,
   SUM(SAL) OVER(PARTITION BY JOB ORDER BY EMPNO
