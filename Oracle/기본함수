@@ -6,7 +6,7 @@ where 		 	조건
 
 Column = 열
 Record = 행
-@@@@@@@@@@@@@연산자
+@@@@@@@@@@@@@       연산자  @@@
 
 where not job='SALESMAN' AND DEPTNC=30;
 and, or, not, <, >, <=, >=, =
@@ -26,7 +26,7 @@ ename like '%A%'; 	~A~
 등가비교 연산자 null
 comm is NULL 	is 대신 = 틀림
 	
-@@@@@@@@@@@@@@@집합
+@@@@@@@@@@@@@@@     집합  @@@@
 
 union 	합
 union all 	합 (중복 포함)
@@ -58,7 +58,7 @@ trim	공백제거
 rtrim	우
 ltrim	좌
 
-@@@@@@@@@@@@@@@@숫자 데이터
+@@@@@@@@@@@@@@@@   숫자 데이터   @@@@@@@
 
 round(1234.5678,0) 	반올림
 trunc(1234.5678,2) 		자름
@@ -116,7 +116,7 @@ CASE WHEN A = 'a' THEN 'o'
      ELSE '나머지'
 END
 
-@@@@@@@@@@@@@@@@@@@다중행 함수, 데이터 그룹화
+@@@@@@@@@@@@@@@@@@@  다중행 함수, 데이터 그룹화  @@@222
 
 count(*)  max(sal)  min(sal)  sum(sal)  avg(sal)
 
@@ -157,7 +157,7 @@ select * from (select 원본 테이블)
 decode 문을 활용하여 pivot 구현 (귀찮)
  max(decode(job,'CLERK',sal)) as CLERK
 
-@@@@@@@@@@@@@@@@@@@@조인
+@@@@@@@@@@@@@@@@@@@@   조인     @@@@@@
 
 곱형식
 select * from emp,dept;
@@ -199,7 +199,7 @@ select e10.empno,e10.ename,e10.deptno,d.dname,d.loc
 from E10,D
 where E10.deptno=D.deptno;
 
-- SubQuery
+@@@@@@@@@@@@@@@@@@@@@   SubQuery  @@@@@
 
 결과 행 반환
 
