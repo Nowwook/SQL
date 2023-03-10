@@ -99,17 +99,22 @@ TO_DATE('2018 +07-04','yyyy/mm/dd')
 NVL(comm,0) 		(아닐때,null일때)
 NVL2(comm,'O','X') 	 (데이터가,아닐때,null일때)
 
-DECODE(job,		     조건	
-           'MANAGER',  sal*1.1,
-           'SALESMAN', SAL*1.05,
-           'ANALYST',   SAL,
-           SAL*1.03) 
+DECODE(job,		     		
+	'MANAGER',  sal*1.1,		
+        'SALESMAN', SAL*1.05,
+        'ANALYST',   SAL,
+         SAL*1.03) 
 
-case
-    when comm is null then '해당 X'
-    when comm = 0    then '수당 X'
-    when comm > 0    then '수당 : ' || comm	(|| = +)
-    end   
+CASE A
+WHEN 'a' THEN 'o'
+WHEN 'b' THEN 'x'
+ELSE '나머지'
+END
+
+CASE WHEN A = 'a' THEN 'o'
+     WHEN A = 'b' THEN 'x' || '임'
+     ELSE '나머지'
+END
 
 @@@@@@@@@@@@@@@@@@@다중행 함수, 데이터 그룹화
 
