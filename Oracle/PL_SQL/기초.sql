@@ -31,13 +31,32 @@ OR REPLACE
 
 --기본 문법 ex
 CREATE OR REPLACE Procedure 이름 
-  (매개변수1 IN data_type1,
-   매개변수2 OUT date type2)
+  (매개변수1 IN NUMBER,
+   매개변수2 OUT VARCHAR2)
 IS [AS]
 
 BEGIN
-  실행
+  SELECT COUNT(*) INTO CNT
+  FROM DEPT
+  WHERE DEPTNO = 매개변수1;
+  if cnt > 0 then
+    매개변수2 := '이미 등록된 부서번호이다';
+  else
+    INSERT INTO DEPT (NUMBER)
+    VALUES (매개변수1); 
+    COMMIT;
+    매개변수2 := '입력 완료!!';
+  end if; 
 EXCEPTION
+  WHEN OTHERS THEN
+ROLLBACK;
+v_result := 'ERROR 발생';
   에러시 실행
 END;
 /
+
+
+-- 활용
+variable 이름1 varchar2(30);    -- 결과 받을 변수 선언
+EXECUTE Procedure_이름(10, 'seoul', :이름1);
+PRINT 이름1;    -- 확인
