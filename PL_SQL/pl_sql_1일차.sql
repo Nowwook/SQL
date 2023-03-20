@@ -7,12 +7,12 @@ end;
 
 rollback;
 
-set serveroutput on;  -- DBMS_OUTPUT °¡´ÉÇÏ°Ô
+set serveroutput on;  -- DBMS_OUTPUT ê°€ëŠ¥í•˜ê²Œ
 
 BEGIN
   DBMS_OUTPUT.put_Line('nowuk'); 
 END;
-/       -- ºí·° ³¡ Ç¥½Ã / 
+/       -- ë¸”ëŸ­ ë í‘œì‹œ / 
 
 DECLARE 
 amount INTEGER(10); 
@@ -22,11 +22,11 @@ END;
 /
 
 
-DECLARE               -- º¯¼ö ¼±¾ð
+DECLARE               -- ë³€ìˆ˜ ì„ ì–¸
   v_hiredate 	DATE ;
-  v_deptno 	  NUMBER(2) NOT NULL 	default 10;       -- NOT NULLÀÌ¸é ÃÊ±â°ª ÇÊ¼ö
+  v_deptno 	  NUMBER(2) NOT NULL 	default 10;       -- NOT NULLì´ë©´ ì´ˆê¸°ê°’ í•„ìˆ˜
   v_location 	VARCHAR2(13) 		    := 'Atlanta';
-  c_comm 	    CONSTANT NUMBER 	  := 1400 ;         -- CONSTANT »ó¼ö, °ª°íÁ¤
+  c_comm 	    CONSTANT NUMBER 	  := 1400 ;         -- CONSTANT ìƒìˆ˜, ê°’ê³ ì •
 BEGIN 
   DBMS_OUTPUT.PUT_LINE ( v_hiredate ) ; 
   DBMS_OUTPUT.PUT_LINE ( v_deptno ) ; 
@@ -36,20 +36,20 @@ END ;
 /
 
 /* 
-  PL/SQL º¯¼ö
-- ½ºÄ®¶ó	´ÜÀÏ°ª
-- ÂüÁ¶	ÀúÀåÀ§Ä¡ °¡¸£Å°´Â Æ÷ÀÎÅÍ °ª
-- LOB	´ëÇü °´Ã¼ÀÇ À§Ä¡¸¦ ÁöÁ¤ÇÏ´Â À§Ä¡ÀÚ¶ó´Â °ª
-- Á¶ÇÕ	PL/SQL ÄÃ·º¼Ç°ú ·¹ÄÚµå º¯¼ö¸¦ ÅëÇØ »ç¿ë
+  PL/SQL ë³€ìˆ˜
+- ìŠ¤ì¹¼ë¼	ë‹¨ì¼ê°’
+- ì°¸ì¡°	ì €ìž¥ìœ„ì¹˜ ê°€ë¥´í‚¤ëŠ” í¬ì¸í„° ê°’
+- LOB	ëŒ€í˜• ê°ì²´ì˜ ìœ„ì¹˜ë¥¼ ì§€ì •í•˜ëŠ” ìœ„ì¹˜ìžë¼ëŠ” ê°’
+- ì¡°í•©	PL/SQL ì»¬ë ‰ì…˜ê³¼ ë ˆì½”ë“œ ë³€ìˆ˜ë¥¼ í†µí•´ ì‚¬ìš©
 
-½ºÄ®¶ó µ¥ÀÌÅÍ Å¸ÀÔ ÆÁ
-number(2,4) ÀÇ ÃÖ´ñ°ª 0.0099
-number(4,-1)ÀÇ ÃÖ´ñ°ª 99990.0
-BINARY_INTEGER º¸´Ù PLS_INTEGER °¡ ´õ ºü¸§
+ìŠ¤ì¹¼ë¼ ë°ì´í„° íƒ€ìž… íŒ
+number(2,4) ì˜ ìµœëŒ“ê°’ 0.0099
+number(4,-1)ì˜ ìµœëŒ“ê°’ 99990.0
+BINARY_INTEGER ë³´ë‹¤ PLS_INTEGER ê°€ ë” ë¹ ë¦„
 */
 
 /*
-ÂüÁ¶ ¼Ó¼º
+ì°¸ì¡° ì†ì„±
 %TYPE
 */
 DECLARE 
@@ -61,10 +61,10 @@ END;
 /
 
 /*
-ºñPL/SQL º¯¼ö: ¹ÙÀÎµå º¯¼ö
-VARIABLE ·Î »ý¼º
-: ·Î ÂüÁ¶ (È£½ºÆ® º¯¼ö Ç¥½Ã)
-PRINT °¡´É
+ë¹„PL/SQL ë³€ìˆ˜: ë°”ì¸ë“œ ë³€ìˆ˜
+VARIABLE ë¡œ ìƒì„±
+: ë¡œ ì°¸ì¡° (í˜¸ìŠ¤íŠ¸ ë³€ìˆ˜ í‘œì‹œ)
+PRINT ê°€ëŠ¥
 */
 VARIABLE B_SAL  NUMBER
 
@@ -78,13 +78,13 @@ PRINT B_SAL
 
 
 /*
-·º½ÃÄ® ´ÜÀ§ - ºí·ÏÀÇ ±¸Á¶, ½Äº°ÀÚ,±¸ºÐÀÚ,¸®ÅÍ·²,ÁÖ¼®
+ë ‰ì‹œì¹¼ ë‹¨ìœ„ - ë¸”ë¡ì˜ êµ¬ì¡°, ì‹ë³„ìž,êµ¬ë¶„ìž,ë¦¬í„°ëŸ´,ì£¼ì„
 
-ÇÁ·Î½ÃÀú¹®¿¡¼­ DECODE, ±×·ìÇÔ¼ö(´Üµ¶) »ç¿ë ºÒ°¡
+í”„ë¡œì‹œì €ë¬¸ì—ì„œ DECODE, ê·¸ë£¹í•¨ìˆ˜(ë‹¨ë…) ì‚¬ìš© ë¶ˆê°€
 
-ÁßÃ¸ºí·Ï¿¡¼­ »óÀ§ º¯¼ö´Â ÇÏÀ§¿¡¼­ »ç¿ë°¡´É, ÇÏÀ§ºí·Ï Á¾·á½Ã ³»ºÎ º¯¼öµµ »ç¶óÁü
-<<·¹ÀÌºíÀÌ¸§>> À¸·Î ·¹ÀÌºí °¡´É
-ÇÏÀ§¿¡¼­  ·¹ÀÌºíÀÌ¸§.º¯¼ö  »ç¿ë
+ì¤‘ì²©ë¸”ë¡ì—ì„œ ìƒìœ„ ë³€ìˆ˜ëŠ” í•˜ìœ„ì—ì„œ ì‚¬ìš©ê°€ëŠ¥, í•˜ìœ„ë¸”ë¡ ì¢…ë£Œì‹œ ë‚´ë¶€ ë³€ìˆ˜ë„ ì‚¬ë¼ì§
+<<ë ˆì´ë¸”ì´ë¦„>> ìœ¼ë¡œ ë ˆì´ë¸” ê°€ëŠ¥
+í•˜ìœ„ì—ì„œ  ë ˆì´ë¸”ì´ë¦„.ë³€ìˆ˜  ì‚¬ìš©
 */
 BEGIN <<outer>>
 DECLARE
@@ -141,9 +141,9 @@ END;
 
 -- sp (server process)
 /*
-¸í·É¹® I,U,D ¿Í ´Þ¸® select´Â º¯¼ö¸¦ ¹Þ¾Æ¾ßÇÔ(INTO ·Î ¹Þ) 
-INTO´Â ´ÜÀÏÇà¸¸ ¹«Á¶°Ç ¹ÝÈ¯ ÇØ¾ßÇÔ
-DDL(C,A,D,T),DCL(G,R) Àº ½ÇÇà½Ã µ¿Àû sql »ç¿ë, Á÷Á¢ ½ÇÇàx
+ëª…ë ¹ë¬¸ I,U,D ì™€ ë‹¬ë¦¬ selectëŠ” ë³€ìˆ˜ë¥¼ ë°›ì•„ì•¼í•¨(INTO ë¡œ ë°›) 
+INTOëŠ” ë‹¨ì¼í–‰ë§Œ ë¬´ì¡°ê±´ ë°˜í™˜ í•´ì•¼í•¨
+DDL(C,A,D,T),DCL(G,R) ì€ ì‹¤í–‰ì‹œ ë™ì  sql ì‚¬ìš©, ì§ì ‘ ì‹¤í–‰x
 */
 BEGIN 
   UPDATE EMP 
@@ -160,11 +160,11 @@ rollback;
 select count(*) from tacct;
 select * from tacct;
 
--- F10 ½ÇÇà°èÈ¹
+-- F10 ì‹¤í–‰ê³„íš
 /*
-cursor °á°ú°ªÀ» ÀúÀåÇÏ´Â Àü¿ë ¸Þ¸ð¸® °ø°£
-sql%found ¹ÝÈ¯ À¯¹«, ºÎ¿ï¼Ó¼º
-sql%rowcount ¿µÇâ ¹ÞÀº Çà¼ö
+cursor ê²°ê³¼ê°’ì„ ì €ìž¥í•˜ëŠ” ì „ìš© ë©”ëª¨ë¦¬ ê³µê°„
+sql%found ë°˜í™˜ ìœ ë¬´, ë¶€ìš¸ì†ì„±
+sql%rowcount ì˜í–¥ ë°›ì€ í–‰ìˆ˜
 */
 IF SQL%FOUND THEN 
   DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT ||' row updated'); 
@@ -179,7 +179,7 @@ begin
   DBMS_OUTPUT.PUT_LINE(max_deptno);
 end;
 /
--- BULK COLLECT INTO µ¥ÀÌÅÍ ¾çÀÌ ¸¹À» ¶§ ÇÑ¹ø¿¡ ¹ÙÀÎµù 
+-- BULK COLLECT INTO ë°ì´í„° ì–‘ì´ ë§Žì„ ë•Œ í•œë²ˆì— ë°”ì¸ë”© 
 select *
   from departments;
 
@@ -204,10 +204,10 @@ FROM departments;
 
 
 /*
-if ½Ã null °ªÀº else ÂÊ
+if ì‹œ null ê°’ì€ else ìª½
 */
 
--- &,: ÀÔ·Â°ª ³Ö´Â Ã¢ ³ª¿È, &Àº Ä¡È¯º¯¼ö, :Àº ¹ÙÀÎµåº¯¼ö
+-- &,: ìž…ë ¥ê°’ ë„£ëŠ” ì°½ ë‚˜ì˜´, &ì€ ì¹˜í™˜ë³€ìˆ˜, :ì€ ë°”ì¸ë“œë³€ìˆ˜
 -- &CONDITION  
 DECLARE
   v_grade CHAR(1) := UPPER('&grade'); 
@@ -222,13 +222,13 @@ BEGIN
 DBMS_OUTPUT.PUT_LINE ('Grade: '|| v_grade || ' Appraisal ' || v_appraisal);
 END;
 /
--- case ¹®ÀÌ¸é end case; ·Î ³¡
--- then¿¡¼­ °ªÀÌ ¾Æ´Ñ ÀÛ¾÷ÀÌ ÀÖÀ¸¸é ¹®
+-- case ë¬¸ì´ë©´ end case; ë¡œ ë
+-- thenì—ì„œ ê°’ì´ ì•„ë‹Œ ìž‘ì—…ì´ ìžˆìœ¼ë©´ ë¬¸
 
 /*
-¹üÀ§¿¡ null ºÒ°¡
-LOOP Àû¾îµµ 1¹øÀº ½ÇÇà
-WHILE Á¶°Ç LOOP 
+ë²”ìœ„ì— null ë¶ˆê°€
+LOOP ì ì–´ë„ 1ë²ˆì€ ì‹¤í–‰
+WHILE ì¡°ê±´ LOOP 
 */
 DECLARE
    v_countryid locations.country_id%TYPE := 'CA';
@@ -259,20 +259,20 @@ BEGIN
   */
   
   /*
-  FOR I IN [REVERSE] 1..3 LOOP  -- ¸®¹ö½º ½Ã 321
+  FOR I IN [REVERSE] 1..3 LOOP  -- ë¦¬ë²„ìŠ¤ ì‹œ 321
    INSERT INTO locations
     (location_id, city, country_id)
    VALUES((v_loc_id+i), v_new_city, v_countryid));
   END LOOP;
   
-for ¾ÈÀÇ I´Â Ãâ·Â ºÒ°¡
+for ì•ˆì˜ IëŠ” ì¶œë ¥ ë¶ˆê°€
   */
 END;
 /
 
 /*
-ÁßÃ¸ LOOP ³»ºÎ¿¡¼­ ¿ÜºÎ¸¸ Á¾·á °¡´É
-<<·¹ÀÌºíÀÌ¸§>>
+ì¤‘ì²© LOOP ë‚´ë¶€ì—ì„œ ì™¸ë¶€ë§Œ ì¢…ë£Œ ê°€ëŠ¥
+<<ë ˆì´ë¸”ì´ë¦„>>
 */
 DECLARE 
   x	NUMBER := 3 ;
@@ -298,23 +298,23 @@ select * from messages;
 
 /*
 Q1
-ÇÑ±¹½Å¿ëÆò°¡¿¡¼­ 'AA' µî±ÞÀÇ Æò°¡¸¦ ¹Þ°í 2000³â ÀÌÈÄ ¼³¸³µÈ ¹ýÀÎ Â÷ÁÖ°¡ °³¼³ÇÑ ´ëÃâ °èÁÂ Á¤º¸¸¦ °Ë»öÇÏ¼¼¿ä.
-Å×ÀÌºí	: TACCT (°èÁÂÁ¤º¸), TID (Â÷ÁÖÁ¤º¸), TCREDIT (½Å¿ëµî±ÞÁ¤º¸) »ç¿ë 
-°Ë»ö		: lnact, lnact_seq, branch, lnid, ln_dt, exp_dt, ln_amt
-Á¶°Ç1	: ´ëÃâ °èÁÂ (tacct.lmt_typ IS NULL)
-Á¶°Ç2	: 2000³â ÀÌÈÄ ¼³¸³µÈ Â÷ÁÖ (tid.bthday >= TO_DATE('2000/01/01','YYYY/MM/DD'))
-Á¶°Ç3	: ÇÑ±¹½Å¿ëÆò°¡ (tcredit.acode = '01') 
-Á¶°Ç4	: 'AA' µî±Þ (tcredit.code = '03') 
-Á¤·Ä		: °èÁÂ¹øÈ£(lnact), °èÁÂÀÏ·Ã¹øÈ£(lnact_seq) ±âÁØ ¿À¸§Â÷¼ø 
-LNID À¸·Î Á¶ÀÎ
+í•œêµ­ì‹ ìš©í‰ê°€ì—ì„œ 'AA' ë“±ê¸‰ì˜ í‰ê°€ë¥¼ ë°›ê³  2000ë…„ ì´í›„ ì„¤ë¦½ëœ ë²•ì¸ ì°¨ì£¼ê°€ ê°œì„¤í•œ ëŒ€ì¶œ ê³„ì¢Œ ì •ë³´ë¥¼ ê²€ìƒ‰í•˜ì„¸ìš”.
+í…Œì´ë¸”	: TACCT (ê³„ì¢Œì •ë³´), TID (ì°¨ì£¼ì •ë³´), TCREDIT (ì‹ ìš©ë“±ê¸‰ì •ë³´) ì‚¬ìš© 
+ê²€ìƒ‰		: lnact, lnact_seq, branch, lnid, ln_dt, exp_dt, ln_amt
+ì¡°ê±´1	: ëŒ€ì¶œ ê³„ì¢Œ (tacct.lmt_typ IS NULL)
+ì¡°ê±´2	: 2000ë…„ ì´í›„ ì„¤ë¦½ëœ ì°¨ì£¼ (tid.bthday >= TO_DATE('2000/01/01','YYYY/MM/DD'))
+ì¡°ê±´3	: í•œêµ­ì‹ ìš©í‰ê°€ (tcredit.acode = '01') 
+ì¡°ê±´4	: 'AA' ë“±ê¸‰ (tcredit.code = '03') 
+ì •ë ¬		: ê³„ì¢Œë²ˆí˜¸(lnact), ê³„ì¢Œì¼ë ¨ë²ˆí˜¸(lnact_seq) ê¸°ì¤€ ì˜¤ë¦„ì°¨ìˆœ 
+LNID ìœ¼ë¡œ ì¡°ì¸
 Q2
-'AA' µî±ÞÀÇ Æò°¡¸¦ ¹Þ°í 2000³â ÀÌÈÄ ¼³¸³µÈ ¹ýÀÎ Â÷ÁÖ°¡ °³¼³ÇÑ ´ëÃâ °èÁÂ Á¤º¸¸¦ °Ë»öÇÏ¼¼¿ä.
-Å×ÀÌºí	: TACCT (°èÁÂÁ¤º¸), TID (Â÷ÁÖÁ¤º¸), TCREDIT (½Å¿ëµî±ÞÁ¤º¸) »ç¿ë 
-°Ë»ö		: lnact, lnact_seq, branch, lnid, ln_dt, exp_dt, ln_amt
-Á¶°Ç1	: ´ëÃâ °èÁÂ (tacct.lmt_typ IS NULL)
-Á¶°Ç2	: 2000³â ÀÌÈÄ ¼³¸³µÈ Â÷ÁÖ (tid.bthday >= TO_DATE('2000/01/01','YYYY/MM/DD'))
-Á¶°Ç3	: 'AA' µî±Þ (tcredit.code = '03') 
-Á¤·Ä		: °èÁÂ¹øÈ£(lnact), °èÁÂÀÏ·Ã¹øÈ£(lnact_seq) ±âÁØ ¿À¸§Â÷¼ø 
+'AA' ë“±ê¸‰ì˜ í‰ê°€ë¥¼ ë°›ê³  2000ë…„ ì´í›„ ì„¤ë¦½ëœ ë²•ì¸ ì°¨ì£¼ê°€ ê°œì„¤í•œ ëŒ€ì¶œ ê³„ì¢Œ ì •ë³´ë¥¼ ê²€ìƒ‰í•˜ì„¸ìš”.
+í…Œì´ë¸”	: TACCT (ê³„ì¢Œì •ë³´), TID (ì°¨ì£¼ì •ë³´), TCREDIT (ì‹ ìš©ë“±ê¸‰ì •ë³´) ì‚¬ìš© 
+ê²€ìƒ‰		: lnact, lnact_seq, branch, lnid, ln_dt, exp_dt, ln_amt
+ì¡°ê±´1	: ëŒ€ì¶œ ê³„ì¢Œ (tacct.lmt_typ IS NULL)
+ì¡°ê±´2	: 2000ë…„ ì´í›„ ì„¤ë¦½ëœ ì°¨ì£¼ (tid.bthday >= TO_DATE('2000/01/01','YYYY/MM/DD'))
+ì¡°ê±´3	: 'AA' ë“±ê¸‰ (tcredit.code = '03') 
+ì •ë ¬		: ê³„ì¢Œë²ˆí˜¸(lnact), ê³„ì¢Œì¼ë ¨ë²ˆí˜¸(lnact_seq) ê¸°ì¤€ ì˜¤ë¦„ì°¨ìˆœ 
 */
 
 --Q1
