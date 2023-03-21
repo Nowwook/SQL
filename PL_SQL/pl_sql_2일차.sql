@@ -1,11 +1,11 @@
 /*
-Á¶ÇÕµ¥ÀÌÅÍ
-ÇÏ³ª ÀÌ»óÀÇ ÇÊµå¸¦ °¡Áø º¯¼ö
+ì¡°í•©ë°ì´í„°
+í•˜ë‚˜ ì´ìƒì˜ í•„ë“œë¥¼ ê°€ì§„ ë³€ìˆ˜
 Record
 Collection
 
 */
--- ·¹ÄÚµå ¿¹
+-- ë ˆì½”ë“œ ì˜ˆ
 SET SERVEROUTPUT ON
 DECLARE
   TYPE t_rec IS RECORD
@@ -25,7 +25,7 @@ BEGIN
    to_char(v_myrec.v_sal));
 END;
 /
--- ÅëÃ¼·Î ¾÷µ«
+-- í†µì²´ë¡œ ì—…ëŽƒ
 UPDATE retired_emps 
 SET ROW = v_emp_rec     -- row  , %ROWTYPE
 WHERE empno = v_employee_number;
@@ -45,12 +45,12 @@ END;
 /
 
 /*
-¸í½ÃÀû Ä¿¼­
+ëª…ì‹œì  ì»¤ì„œ
 */
 DECLARE 
   emp_rec	emp%ROWTYPE ; 
 BEGIN 
-  SELECT * INTO emp_rec         -- ÇàÀÌ ¸¹¾Æ ¿À·ù
+  SELECT * INTO emp_rec         -- í–‰ì´ ë§Žì•„ ì˜¤ë¥˜
   FROM emp
   WHERE deptno = 10 ;
 
@@ -59,32 +59,32 @@ END ;
 /
 
 DECLARE 
-  CURSOR emp_cur IS         -- Ä¿¼­ ¼±¾ð
+  CURSOR emp_cur IS         -- ì»¤ì„œ ì„ ì–¸
     SELECT * FROM emp WHERE deptno = 10 ; 
   emp_rec	emp%ROWTYPE ; 
 BEGIN 
-  OPEN emp_cur ;        -- ½ÇÇà ÈÄ 
+  OPEN emp_cur ;        -- ì‹¤í–‰ í›„ 
 
---  FETCH emp_cur INTO emp_rec ;     -- ÇöÀç ÇàÀ» º¯¼ö¿¡ ·Îµå
+--  FETCH emp_cur INTO emp_rec ;     -- í˜„ìž¬ í–‰ì„ ë³€ìˆ˜ì— ë¡œë“œ
 --  DBMS_OUTPUT.PUT_LINE ( emp_rec.empno || ' ' || emp_rec.ename ) ; 
 --
---  FETCH emp_cur INTO emp_rec ;      -- ·çÇÁ ¾ÈÇÏ¸é °³¼ö ¸¸Å­ ÀÛ¼º
+--  FETCH emp_cur INTO emp_rec ;      -- ë£¨í”„ ì•ˆí•˜ë©´ ê°œìˆ˜ ë§Œí¼ ìž‘ì„±
 --  DBMS_OUTPUT.PUT_LINE ( emp_rec.empno || ' ' || emp_rec.ename ) ; 
 
   LOOP 
     FETCH emp_cur INTO emp_rec ; 
-    EXIT WHEN emp_cur%NOTFOUND ;        -- ·çÇÁ ³ª¿Ã °¢
+    EXIT WHEN emp_cur%NOTFOUND ;        -- ë£¨í”„ ë‚˜ì˜¬ ê°
     DBMS_OUTPUT.PUT_LINE ( emp_rec.empno || ' ' || emp_rec.ename ) ; 
   END LOOP ; 
   
-  CLOSE emp_cur ;     -- °á°ú Çà ÁýÇÕ ÇØÁ¦
+  CLOSE emp_cur ;     -- ê²°ê³¼ í–‰ ì§‘í•© í•´ì œ
 END ;
 /
 
 /*
-Ä¿¼­ FOR LOOP
-- OPEN, FETCH, END, CLOSE ÀÛ¾÷ÀÌ ¾Ï½ÃÀûÀ¸·Î ¹ß»ý
-- RECORD´Â ¾Ï½ÃÀûÀ¸·Î ¼±¾ð
+ì»¤ì„œ FOR LOOP
+- OPEN, FETCH, END, CLOSE ìž‘ì—…ì´ ì•”ì‹œì ìœ¼ë¡œ ë°œìƒ
+- RECORDëŠ” ì•”ì‹œì ìœ¼ë¡œ ì„ ì–¸
 */
 DECLARE
   CURSOR c_emp_cursor IS 
@@ -99,11 +99,11 @@ END;
 /
 
 /*
-¸í½ÃÀû Ä¿¼­ ¼Ó¼º
-%ISOPEN - Ä¿¼­°¡ ¿­·Á ÀÖÀ¸¸é TRUE·Î Æò°¡, if ·Î È®ÀÎ °¡´É
-%NOTFOUND - °¡Àå ÃÖ±Ù ÆÐÄ¡(fetch)°¡ ÇàÀ» ¹ÝÈ¯ÇÏÁö ¾ÊÀ¸¸é TRUE·Î Æò°¡
-%FOUND - °¡Àå ÃÖ±Ù ÆÐÄ¡(fetch)°¡ ÇàÀ» ¹ÝÈ¯ÇÏ¸é TRUE·Î Æò°¡
-%ROWCOUNT - Áö±Ý±îÁö ¹ÝÈ¯µÈ ÃÑ Çà ¼ö·Î Æò°¡
+ëª…ì‹œì  ì»¤ì„œ ì†ì„±
+%ISOPEN - ì»¤ì„œê°€ ì—´ë ¤ ìžˆìœ¼ë©´ TRUEë¡œ í‰ê°€, if ë¡œ í™•ì¸ ê°€ëŠ¥
+%NOTFOUND - ê°€ìž¥ ìµœê·¼ íŒ¨ì¹˜(fetch)ê°€ í–‰ì„ ë°˜í™˜í•˜ì§€ ì•Šìœ¼ë©´ TRUEë¡œ í‰ê°€
+%FOUND - ê°€ìž¥ ìµœê·¼ íŒ¨ì¹˜(fetch)ê°€ í–‰ì„ ë°˜í™˜í•˜ë©´ TRUEë¡œ í‰ê°€
+%ROWCOUNT - ì§€ê¸ˆê¹Œì§€ ë°˜í™˜ëœ ì´ í–‰ ìˆ˜ë¡œ í‰ê°€
 */
 
 DECLARE
@@ -126,8 +126,8 @@ END;
 /
 
 /*
-¿¹¿ÜÃ³¸® Exception
-ºí·°ÇÏ³ªÀÇ ÀÛ¾÷ Áß°£¿¡ ¿À·ù³ª¸é ÀüÃ¼ÀÛ¾÷ Ãë¼Ò, ¿¹¿Ü½Ã ¿À·ù³ªµµ Àü ÀÛ¾÷Àº ½ÇÇàÇÏ°í Á¤»ó Á¾·á
+ì˜ˆì™¸ì²˜ë¦¬ Exception
+ë¸”ëŸ­í•˜ë‚˜ì˜ ìž‘ì—… ì¤‘ê°„ì— ì˜¤ë¥˜ë‚˜ë©´ ì „ì²´ìž‘ì—… ì·¨ì†Œ, ì˜ˆì™¸ì‹œ ì˜¤ë¥˜ë‚˜ë„ ì „ ìž‘ì—…ì€ ì‹¤í–‰í•˜ê³  ì •ìƒ ì¢…ë£Œ
 */
 DECLARE 
   EMP_REC   EMP%ROWTYPE ; 
@@ -143,7 +143,7 @@ END ;
 /
 SELECT * FROM EMP WHERE EMPNO = 7782 ;
 
--- ¿¹¿Ü »ç¿ë
+-- ì˜ˆì™¸ ì‚¬ìš©
 BEGIN 
   UPDATE emp 
   SET sal = 3000 
@@ -160,7 +160,7 @@ END ;
 /
 
 /*
- À¯Àú Á¤ÀÇ ¿¹¿Ü Æ®·¦
+ ìœ ì € ì •ì˜ ì˜ˆì™¸ íŠ¸ëž©
 */
 
 BEGIN
@@ -170,8 +170,8 @@ BEGIN
 
   IF SQL%NOTFOUND THEN
     RAISE_APPLICATION_ERROR ( -20001, 'No such department id.',true ) ; 
-    -- ¿ø·¡ ³ª¿À´Â ¿¡·¯ ÄÚµå ´ë½Å, true ±âÁ¸ ÄÚµåµµ ³ª¿À°Ô, false ¾È³ª¿À°Ô
-    -- -20000 ~ 20999 ¹üÀ§
+    -- ì›ëž˜ ë‚˜ì˜¤ëŠ” ì—ëŸ¬ ì½”ë“œ ëŒ€ì‹ , true ê¸°ì¡´ ì½”ë“œë„ ë‚˜ì˜¤ê²Œ, false ì•ˆë‚˜ì˜¤ê²Œ
+    -- -20000 ~ 20999 ë²”ìœ„
   END IF;
 END;
 /
@@ -205,13 +205,13 @@ end;
 
 
 /*
-ÀÍ¸íºí·Ï                              ÇÁ·Î½ÃÀú
-ÀÌ¸§ÀÌ ÁöÁ¤µÇÁö ¾ÊÀº PL/SQL ºí·Ï        ¸í¸íµÈ PL/SQL ºí·Ï
-¸Å¹ø ÄÄÆÄÀÏ                           ÇÑ ¹ø¸¸ ÄÄÆÄÀÏ µÊ
-µ¥ÀÌÅÍº£ÀÌ½º ÀúÀåµÇÁö ¾ÊÀ½              µ¥ÀÌÅÍº£ÀÌ½º¿¡ ÀúÀåµÊ
-´Ù¸¥ ÀÀ¿ë ÇÁ·Î±×·¥¿¡¼­ È£Ãâ ÇÒ ¼ö¾øÀ½    ÀÌ¸§ÀÌ ÀÖÀ¸¹Ç·Î ´Ù¸¥ ÀÀ¿ë ÇÁ·Î±×·¥¿¡¼­ È£ÃâÇÒ ¼ö ÀÖÀ½
-°ªÀ» ¹ÝÈ¯ÇÏÁö ¾ÊÀ½                     ÇÔ¼ö´Â °ªÀ» ¹ÝÈ¯ÇØ¾ß ÇÔ
-ÆÄ¶ó¹ÌÅÍ¸¦ »ç¿ëÇÒ ¼ö ¾øÀ½               ÆÄ¶ó¹ÌÅÍ¸¦ »ç¿ëÇÒ ¼ö ÀÖÀ½
+ìµëª…ë¸”ë¡                              í”„ë¡œì‹œì €
+ì´ë¦„ì´ ì§€ì •ë˜ì§€ ì•Šì€ PL/SQL ë¸”ë¡        ëª…ëª…ëœ PL/SQL ë¸”ë¡
+ë§¤ë²ˆ ì»´íŒŒì¼                           í•œ ë²ˆë§Œ ì»´íŒŒì¼ ë¨
+ë°ì´í„°ë² ì´ìŠ¤ ì €ìž¥ë˜ì§€ ì•ŠìŒ              ë°ì´í„°ë² ì´ìŠ¤ì— ì €ìž¥ë¨
+ë‹¤ë¥¸ ì‘ìš© í”„ë¡œê·¸ëž¨ì—ì„œ í˜¸ì¶œ í•  ìˆ˜ì—†ìŒ    ì´ë¦„ì´ ìžˆìœ¼ë¯€ë¡œ ë‹¤ë¥¸ ì‘ìš© í”„ë¡œê·¸ëž¨ì—ì„œ í˜¸ì¶œí•  ìˆ˜ ìžˆìŒ
+ê°’ì„ ë°˜í™˜í•˜ì§€ ì•ŠìŒ                     í•¨ìˆ˜ëŠ” ê°’ì„ ë°˜í™˜í•´ì•¼ í•¨
+íŒŒë¼ë¯¸í„°ë¥¼ ì‚¬ìš©í•  ìˆ˜ ì—†ìŒ               íŒŒë¼ë¯¸í„°ë¥¼ ì‚¬ìš©í•  ìˆ˜ ìžˆìŒ
 */
 
 ROLLBACK;
@@ -264,7 +264,7 @@ BEGIN
   p3 := p1 + p2 ; 
 END proc1 ; 
 /
--- ±âº»°ª ÀÖÀ»¶§
-EXECUTE proc1(1,B);      -- À§Ä¡ ÁöÁ¤ ¹æ½Ä   
-EXECUTE proc1 (p3 => B); -- ÀÌ¸§ ÁöÁ¤ ¹æ½Ä
--- °°ÀÌ ¾µ ½Ã À§Ä¡ÁöÁ¤ ¹«Á¶°Ç ¸ÕÀú
+-- ê¸°ë³¸ê°’ ìžˆì„ë•Œ
+EXECUTE proc1(1,B);      -- ìœ„ì¹˜ ì§€ì • ë°©ì‹   
+EXECUTE proc1 (p3 => B); -- ì´ë¦„ ì§€ì • ë°©ì‹
+-- ê°™ì´ ì“¸ ì‹œ ìœ„ì¹˜ì§€ì • ë¬´ì¡°ê±´ ë¨¼ì €
