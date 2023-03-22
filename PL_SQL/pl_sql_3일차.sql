@@ -1,4 +1,4 @@
--- ADD_JOB ÇÁ·Î½ÃÀú¸¦ »ý¼º, ÄÄÆÄÀÏ, È£ÃâÇÏ¿© °á°ú¸¦ °ËÅä
+-- ADD_JOB í”„ë¡œì‹œì €ë¥¼ ìƒì„±, ì»´íŒŒì¼, í˜¸ì¶œí•˜ì—¬ ê²°ê³¼ë¥¼ ê²€í† 
 CREATE TABLE JOB_SAMPLE AS SELECT * FROM JOBS;
 
 CREATE OR REPLACE PROCEDURE ADD_JOB (
@@ -16,7 +16,7 @@ SELECT *
 FROM JOB_SAMPLE
 WHERE JOB_ID = 'IT_DBA';
 
--- JOB_SAMPLE Å×ÀÌºíÀÇ Á÷¹«¸¦ ¼öÁ¤ÇÏ´Â UPD_JOB ÀÌ¶ó´Â ÇÁ·Î½ÃÀú¸¦ »ý¼º
+-- JOB_SAMPLE í…Œì´ë¸”ì˜ ì§ë¬´ë¥¼ ìˆ˜ì •í•˜ëŠ” UPD_JOB ì´ë¼ëŠ” í”„ë¡œì‹œì €ë¥¼ ìƒì„±
 CREATE OR REPLACE PROCEDURE UPD_JOB (
   P_JOBID IN JOBS.JOB_ID%TYPE,
   P_JOBTITLE IN JOBS.JOB_TITLE%TYPE) IS
@@ -35,8 +35,8 @@ EXECUTE UPD_JOB ('IT_DBA', 'Data Administrator')
 SELECT * FROM JOB_SAMPLE
 WHERE JOB_ID = 'IT_DBA';
 
--- »ç¿ø ID¸¦ Á¦°øÇÒ °æ¿ì »ç¿øÀÇ ±Þ¿©¿Í Á÷¹«ID¸¦ °Ë»öÇÏ´Â GET_EMPLOYEES¶ó´Â ÇÁ·Î½ÃÀú¸¦ »ý¼º
--- EMPLOYEES Å×ÀÌºíÀ» query
+-- ì‚¬ì› IDë¥¼ ì œê³µí•  ê²½ìš° ì‚¬ì›ì˜ ê¸‰ì—¬ì™€ ì§ë¬´IDë¥¼ ê²€ìƒ‰í•˜ëŠ” GET_EMPLOYEESë¼ëŠ” í”„ë¡œì‹œì €ë¥¼ ìƒì„±
+-- EMPLOYEES í…Œì´ë¸”ì„ query
 
 CREATE OR REPLACE PROCEDURE GET_EMPLOYEE
   (P_EMPID IN EMPLOYEES.EMPLOYEE_ID%TYPE,
@@ -59,16 +59,16 @@ PRINT V_SALARY V_JOB
 
 
 /*
-ÇÔ¼ö
-- RETURN ÇÊ¼ö, Å¸ÀÔ ¸í½Ã, Å©±âÁöÁ¤x
-- ÇÔ¼ö´Â ¼º´É ÀúÇÏ
-- È£½ºÆ®or·ÎÄÃ º¯¼ö, ´ÜÀÏÇà ÇÔ¼ö, sqlÇ¥Çö½Ä¿¡ »ç¿ë°¡´É
-- Ç¥Çö½ÄÀÏ¶§ Á¦ÇÑ»çÇ×
-  ÇÔ¼ö´Â µ¥ÀÌÅÍº£ÀÌ½º¿¡ ÀúÀåÇØ¾ß ÇÑ´Ù.
-  ÇÔ¼ö ÆÄ¶ó¹ÌÅÍ´Â INÀÌ¾î¾ß ÇÏ¸ç ÀûÇÕÇÑ SQL µ¥ÀÌÅÍ À¯ÇüÀÌ¾î¾ß ÇÑ´Ù.
-  ÇÔ¼ö´Â ÀûÇÕÇÑ SQL µ¥ÀÌÅÍ À¯ÇüÀ» ¹ÝÈ¯ (BOOLEAN, RECORD, TABLE ±ÝÁö)
-  CREATE TABLE ¶Ç´Â ALTER TABLE ¹®ÀÇ CHECK Á¦¾à Á¶°Ç Àý¿¡¼­ È£Ãâ X
-  ¿­ ±âº»°ªÀ» ÁöÁ¤ÇÏ´Â µ¥ »ç¿ë X
+í•¨ìˆ˜
+- RETURN í•„ìˆ˜, íƒ€ìž… ëª…ì‹œ, í¬ê¸°ì§€ì •x
+- í•¨ìˆ˜ëŠ” ì„±ëŠ¥ ì €í•˜
+- í˜¸ìŠ¤íŠ¸orë¡œì»¬ ë³€ìˆ˜, ë‹¨ì¼í–‰ í•¨ìˆ˜, sqlí‘œí˜„ì‹ì— ì‚¬ìš©ê°€ëŠ¥
+- í‘œí˜„ì‹ì¼ë•Œ ì œí•œì‚¬í•­
+  í•¨ìˆ˜ëŠ” ë°ì´í„°ë² ì´ìŠ¤ì— ì €ìž¥í•´ì•¼ í•œë‹¤.
+  í•¨ìˆ˜ íŒŒë¼ë¯¸í„°ëŠ” INì´ì–´ì•¼ í•˜ë©° ì í•©í•œ SQL ë°ì´í„° ìœ í˜•ì´ì–´ì•¼ í•œë‹¤.
+  í•¨ìˆ˜ëŠ” ì í•©í•œ SQL ë°ì´í„° ìœ í˜•ì„ ë°˜í™˜ (BOOLEAN, RECORD, TABLE ê¸ˆì§€)
+  CREATE TABLE ë˜ëŠ” ALTER TABLE ë¬¸ì˜ CHECK ì œì•½ ì¡°ê±´ ì ˆì—ì„œ í˜¸ì¶œ X
+  ì—´ ê¸°ë³¸ê°’ì„ ì§€ì •í•˜ëŠ” ë° ì‚¬ìš© X
 */
 CREATE OR REPLACE FUNCTION get_avg 
   ( p_deptno	NUMBER )  
@@ -117,7 +117,7 @@ END get_avg ;
 SELECT empno, ename, job, sal, deptno, GET_AVG(deptno) 
   FROM emp  ; 
 
-SELECT * FROM V$SQL     -- °ü¸®ÀÚ¿ë 
+SELECT * FROM V$SQL     -- ê´€ë¦¬ìžìš© 
 WHERE SQL_TEXT LIKE 'SELECT /*+ TEST%' ; 
 
 
@@ -154,26 +154,26 @@ SELECT employee_id, last_name,
 FROM employees
 WHERE department_id=30 ;
 
-ALTER SESSION SET NLS_DATE_LANGUAGE=KOREAN ;    -- ÇÑ±Û º¯°æ
-ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY/MM/DD' ;   -- ³¯Â¥Çü½Ä º¯°æ
+ALTER SESSION SET NLS_DATE_LANGUAGE=KOREAN ;    -- í•œê¸€ ë³€ê²½
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY/MM/DD' ;   -- ë‚ ì§œí˜•ì‹ ë³€ê²½
 
 rollback;
 /*
-ÆÐÅ°Áö
- - ³í¸®ÀûÀ¸·Î °ü·ÃµÈ PL/SQL À¯Çü, º¯¼ö ¹× ¼­ºêÇÁ·Î±×·¥À» ±×·ìÈ­
- - spec ¸¸µé°í body ¸¸µé±â
- - SpecÀº ÆÐÅ°Áö ¿ÜºÎ¿¡¼­ ÂüÁ¶ÇÒ ¼ö ÀÖ´Â À¯Çü, º¯¼ö »ó¼ö, ¿¹¿Ü Ä¿¼­ ¹× ¼­ºê ÇÁ·Î±×·¥À» ¼±¾ð(desc ·Î º¸ÀÌ´Â°Å)
- - Body´Â Ä¿¼­¿¡ ´ëÇÑ Query¿Í ¼­ºê ÇÁ·Î±×·¥¿¡ ´ëÇÑ ÄÚµå¸¦ Á¤ÀÇ, Á¤º¸ ¼û±â±â °¡´É
+íŒ¨í‚¤ì§€
+ - ë…¼ë¦¬ì ìœ¼ë¡œ ê´€ë ¨ëœ PL/SQL ìœ í˜•, ë³€ìˆ˜ ë° ì„œë¸Œí”„ë¡œê·¸ëž¨ì„ ê·¸ë£¹í™”
+ - spec ë§Œë“¤ê³  body ë§Œë“¤ê¸°
+ - Specì€ íŒ¨í‚¤ì§€ ì™¸ë¶€ì—ì„œ ì°¸ì¡°í•  ìˆ˜ ìžˆëŠ” ìœ í˜•, ë³€ìˆ˜ ìƒìˆ˜, ì˜ˆì™¸ ì»¤ì„œ ë° ì„œë¸Œ í”„ë¡œê·¸ëž¨ì„ ì„ ì–¸(desc ë¡œ ë³´ì´ëŠ”ê±°)
+ - BodyëŠ” ì»¤ì„œì— ëŒ€í•œ Queryì™€ ì„œë¸Œ í”„ë¡œê·¸ëž¨ì— ëŒ€í•œ ì½”ë“œë¥¼ ì •ì˜, ì •ë³´ ìˆ¨ê¸°ê¸° ê°€ëŠ¥
 */
--- spec ¸ÕÀú ¼±¾ð
+-- spec ë¨¼ì € ì„ ì–¸
 CREATE OR REPLACE PACKAGE comm_pkg IS
-  v_std_comm	NUMBER := 0.1 ;         -- º¯¼ö 
-  PROCEDURE	reset_comm(p_new_comm   NUMBER);    -- °ø¿ë ÇÁ·Î½ÃÀú
+  v_std_comm	NUMBER := 0.1 ;         -- ë³€ìˆ˜ 
+  PROCEDURE	reset_comm(p_new_comm   NUMBER);    -- ê³µìš© í”„ë¡œì‹œì €
 END comm_pkg;
 /
 EXECUTE DBMS_OUTPUT.PUT_LINE(COMM_PKG.v_std_comm) ;
 
--- body ¼±¾ð
+-- body ì„ ì–¸
 CREATE OR REPLACE PACKAGE BODY comm_pkg IS 
   v_priv_comm	NUMBER := 0.2 ; 
   FUNCTION validate(p_comm NUMBER) RETURN BOOLEAN IS 
@@ -290,7 +290,7 @@ END comm_pkg;
 /
 
 -----------------------------------------------------
-¡Ø Overloading »ç¿ë
+â€» Overloading ì‚¬ìš©
 
 CREATE OR REPLACE PACKAGE dept_pkg IS
   PROCEDURE add_department(p_deptno NUMBER, 
@@ -335,7 +335,7 @@ SELECT *
 ROLLBACK ;
 
 
-¡Ø ¿¹¿Ü Ç¥ÁØÈ­
+â€» ì˜ˆì™¸ í‘œì¤€í™”
 
 CREATE OR REPLACE PACKAGE error_pkg IS
   e_fk_err 	    EXCEPTION;
@@ -357,7 +357,7 @@ WHEN OTHERS THEN
 END;
 /
 
-¡Ø ÆÐÅ°Áö ÃÊ±âÈ­ ºí·Ï
+â€» íŒ¨í‚¤ì§€ ì´ˆê¸°í™” ë¸”ë¡
 
 CREATE OR REPLACE PACKAGE avg_pkg IS 
   v_std_avg	NUMBER ; 
@@ -379,7 +379,7 @@ END avg_pkg ;
 
 
 -- ex)
-CREATE OR REPLACE PACKAGE JOB_PKG IS    -- spec »ý¼º
+CREATE OR REPLACE PACKAGE JOB_PKG IS    -- spec ìƒì„±
   PROCEDURE ADD_JOB (P_JOBID JOBS.JOB_ID%TYPE, P_JOBTITLE JOBS.JOB_TITLE%TYPE);
   PROCEDURE UPD_JOB (P_JOBID IN JOBS.JOB_ID%TYPE, P_JOBTITLE IN JOBS.JOB_TITLE%TYPE);
   PROCEDURE DEL_JOB (P_JOBID JOBS.JOB_ID%TYPE);
@@ -387,15 +387,15 @@ CREATE OR REPLACE PACKAGE JOB_PKG IS    -- spec »ý¼º
 END JOB_PKG;
 /
 
-CREATE OR REPLACE PACKAGE BODY JOB_PKG IS   -- body »ý¼º
-  -- ADD_JOB ÇÁ·Î½ÃÀú´Â id,title ¹Þ¾Æ Çà Ãß°¡
+CREATE OR REPLACE PACKAGE BODY JOB_PKG IS   -- body ìƒì„±
+  -- ADD_JOB í”„ë¡œì‹œì €ëŠ” id,title ë°›ì•„ í–‰ ì¶”ê°€
   PROCEDURE ADD_JOB (P_JOBID JOBS.JOB_ID%TYPE,  P_JOBTITLE JOBS.JOB_TITLE%TYPE) IS 
   BEGIN 
     INSERT INTO JOBS (JOB_ID, JOB_TITLE) 
               VALUES (P_JOBID, P_JOBTITLE); 
     COMMIT; 
   END ADD_JOB;
-  -- UPD_JOB ÇÁ·Î½ÃÀú´Â id,title ¹Þ¾Æ id ¿¡ ÇØ´çÇÏ´Â title º¯°æ
+  -- UPD_JOB í”„ë¡œì‹œì €ëŠ” id,title ë°›ì•„ id ì— í•´ë‹¹í•˜ëŠ” title ë³€ê²½
   PROCEDURE UPD_JOB(P_JOBID IN JOBS.JOB_ID%TYPE, P_JOBTITLE IN JOBS.JOB_TITLE%TYPE) IS 
   BEGIN 
     UPDATE JOBS 
@@ -406,7 +406,7 @@ CREATE OR REPLACE PACKAGE BODY JOB_PKG IS   -- body »ý¼º
       RAISE_APPLICATION_ERROR(-20202, 'No job updated.'); 
     END IF; 
   END UPD_JOB; 
-  -- DEL_JOB ÇÁ·Î½ÃÀú´Â id¸¦ ¹Þ¾Æ ÇØ´çÇÏ´Â Çà »èÁ¦
+  -- DEL_JOB í”„ë¡œì‹œì €ëŠ” idë¥¼ ë°›ì•„ í•´ë‹¹í•˜ëŠ” í–‰ ì‚­ì œ
   PROCEDURE DEL_JOB (P_JOBID JOBS.JOB_ID%TYPE) IS 
   BEGIN 
     DELETE FROM JOBS 
@@ -416,7 +416,7 @@ CREATE OR REPLACE PACKAGE BODY JOB_PKG IS   -- body »ý¼º
       RAISE_APPLICATION_ERROR(-20203, 'No jobs deleted.'); 
     END IF; 
   END DEL_JOB; 
-  -- GET_JOB ÇÔ¼ö´Â id¸¦ ¹Þ¾Æ ÇØ´çÇÏ´Â title ¹ÝÈ¯
+  -- GET_JOB í•¨ìˆ˜ëŠ” idë¥¼ ë°›ì•„ í•´ë‹¹í•˜ëŠ” title ë°˜í™˜
   FUNCTION GET_JOB (P_JOBID IN JOBS.JOB_ID%TYPE) 
   RETURN JOBS.JOB_TITLE%TYPE IS 
     V_TITLE JOBS.JOB_TITLE%TYPE; 
@@ -431,7 +431,7 @@ CREATE OR REPLACE PACKAGE BODY JOB_PKG IS   -- body »ý¼º
 END JOB_PKG;
 /
 
--- ÇÁ·Ï½ÃÀú È£Ãâ
+-- í”„ë¡ì‹œì € í˜¸ì¶œ
 EXECUTE JOB_PKG.ADD_JOB('IT_ADMIN','DATA ADMIN') ;  
 SELECT * FROM JOBS ; 
 EXECUTE JOB_PKG.UPD_JOB('IT_ADMIN','Ddatabase Administrator') ; 
@@ -442,15 +442,15 @@ SELECT * FROM JOBS ;
 
 /*
 https://docs.oracle.com/database/121/TDDDG/tdddg_triggers.htm#TDDDG50000
-Æ®¸®°Å
-- Á¶°Ç ¹ß»ý½Ã ÀÚµ¿ ½ÇÇà
-- DML, DDL ¹®
-À¯Çü
--´Ü¼øÆ®¸®°Å
+íŠ¸ë¦¬ê±°
+- ì¡°ê±´ ë°œìƒì‹œ ìžë™ ì‹¤í–‰
+- DML, DDL ë¬¸
+ìœ í˜•
+-ë‹¨ìˆœíŠ¸ë¦¬ê±°
  - before
  - after
- - instead of  ºä¿¡ »ç¿ë
--È¥ÇÕ
+ - instead of  ë·°ì— ì‚¬ìš©
+-í˜¼í•©
 
 */
 CREATE TABLE logt 
@@ -473,10 +473,10 @@ WHERE deptno = 20 ;
 SELECT * FROM logt ; 
  ROLLBACK;
 
--- ÇàÆ®¸®°Å
+-- í–‰íŠ¸ë¦¬ê±°
 CREATE OR REPLACE TRIGGER logt_emp   
   BEFORE INSERT OR DELETE OR UPDATE ON emp
-  FOR EACH ROW      -- Çà Æ®¸®°Å
+  FOR EACH ROW      -- í–‰ íŠ¸ë¦¬ê±°
 BEGIN
   INSERT INTO logt(username,event_date,empno,sal)
   VALUES (user,sysdate,:NEW.empno, :NEW.sal) ; 
@@ -487,7 +487,7 @@ UPDATE emp
 SET sal = sal * 1.1 
 WHERE deptno = 20 ; 
 
--- ¹®Àå Æ®¸®°Å (±âº»°ª)
+-- ë¬¸ìž¥ íŠ¸ë¦¬ê±° (ê¸°ë³¸ê°’)
 CREATE OR REPLACE TRIGGER secure_emp
   BEFORE INSERT ON emp
 BEGIN
@@ -506,18 +506,18 @@ SELECT empno, ename, deptno
 FROM emp 
 WHERE empno = 1234 ;
 
--- old Æ®¸®°Å Ã³¸®ÇÒ °ª ¿ø·¡ °ª
--- new »õ °ª
+-- old íŠ¸ë¦¬ê±° ì²˜ë¦¬í•  ê°’ ì›ëž˜ ê°’
+-- new ìƒˆ ê°’
 
 /*
-Æ®¸®°Å »óÅÂ
+íŠ¸ë¦¬ê±° ìƒíƒœ
 Enabled 
 Disabled 
 */
-ALTER TRIGGER Æ®¸®°ÅÀÌ¸§ DISABLE | ENABLE;
-ALTER TABLE Å×ÀÌºíÀÌ¸§ DIABLE | ENABLE ALL TRIGGERS;
-ALTER TRIGGER Æ®¸®°ÅÀÌ¸§ COMPILE;  -- ¼öÁ¤ÇÑ Æ®¸®°Å ³Ö±â
-DROP TRIGGER Æ®¸®°ÅÀÌ¸§;   -- Æ®¸®°Å Á¦°Å
+ALTER TRIGGER íŠ¸ë¦¬ê±°ì´ë¦„ DISABLE | ENABLE;
+ALTER TABLE í…Œì´ë¸”ì´ë¦„ DIABLE | ENABLE ALL TRIGGERS;
+ALTER TRIGGER íŠ¸ë¦¬ê±°ì´ë¦„ COMPILE;  -- ìˆ˜ì •í•œ íŠ¸ë¦¬ê±° ë„£ê¸°
+DROP TRIGGER íŠ¸ë¦¬ê±°ì´ë¦„;   -- íŠ¸ë¦¬ê±° ì œê±°
 
 -- ex)
 CREATE TABLE NEW_EMPLOYEES AS SELECT * FROM EMPLOYEES;
@@ -556,7 +556,7 @@ VALUES('Eleanor', 'Beh', 30, 'eleanor@test.com', sysdate, 'SA_REP');
 
 
 /*
-ÄÄÆÄÀÏ½Ã ÅØ½ºÆ®·Î ÀúÀå, ½ÇÇà½Ã µ¿ÀÛ
+ì»´íŒŒì¼ì‹œ í…ìŠ¤íŠ¸ë¡œ ì €ìž¥, ì‹¤í–‰ì‹œ ë™ìž‘
 EXECUTE IMMEDIATE
 */
 CREATE OR REPLACE PROCEDURE rename_col 
@@ -572,15 +572,15 @@ EXECUTE rename_col ( 'emp', 'empno', 'id' )
 
 
 /*
-Native Dynamic SQL »ç¿ë
+Native Dynamic SQL ì‚¬ìš©
 
-SQL ¸í·É¹®ÀÇ Ã³¸® °úÁ¤ 
-1. PARSE : ½ÇÇà °èÈ¹ È®º¸ 
-2. BIND  : ¹ÙÀÎµå º¯¼ö¿¡ °ª ÀÔ·Â 
-3. EXECUTE : ½ÇÇà 
-4. FETCH : select ¸í·É¹®¸¸, °Ë»ö °á°ú ÀÎÃâ 
+SQL ëª…ë ¹ë¬¸ì˜ ì²˜ë¦¬ ê³¼ì • 
+1. PARSE : ì‹¤í–‰ ê³„íš í™•ë³´ 
+2. BIND  : ë°”ì¸ë“œ ë³€ìˆ˜ì— ê°’ ìž…ë ¥ 
+3. EXECUTE : ì‹¤í–‰ 
+4. FETCH : select ëª…ë ¹ë¬¸ë§Œ, ê²€ìƒ‰ ê²°ê³¼ ì¸ì¶œ 
 
-¹ØÀÌ ´õ ºü¸§
+ë°‘ì´ ë” ë¹ ë¦„
 */
 SET TIMING ON
 DECLARE 
@@ -610,10 +610,10 @@ DECLARE
 v_cnt		NUMBER ;
 BEGIN
   FOR i IN 1..10000 LOOP
-     EXECUTE IMMEDIATE      -- selectÀº µ¿Àû ¾È ½áµµµÊ,
+     EXECUTE IMMEDIATE      -- selectì€ ë™ì  ì•ˆ ì¨ë„ë¨,
      'select /* test3 */ count(*) 
      from emp 
-     where empno = :1' INTO v_cnt USING i ;   -- using À¸·Î °èÈ¹ Àç»ý¼º ¾ÈÇÏ°Ô
+     where empno = :1' INTO v_cnt USING i ;   -- using ìœ¼ë¡œ ê³„íš ìž¬ìƒì„± ì•ˆí•˜ê²Œ
   END LOOP ;
 END ;
 /
