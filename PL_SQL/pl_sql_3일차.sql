@@ -1,4 +1,4 @@
--- ADD_JOB 프로시저를 생성, 컴파일, 호출하여 결과를 검토
+/* ADD_JOB 프로시저를 생성, 컴파일, 호출하여 결과를 검토*/
 CREATE TABLE JOB_SAMPLE AS SELECT * FROM JOBS;
 
 CREATE OR REPLACE PROCEDURE ADD_JOB (
