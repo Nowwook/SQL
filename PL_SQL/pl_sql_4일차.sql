@@ -1,35 +1,35 @@
 /*
 Composite Data Types
- ·¹ÄÚµå - ¼­·Î ´Ù¸¥ Å¸ÀÔÀ» »ç¿ëÇÏ´Â ÇÏ³ª ÀÌ»óÀÇ ÇÊµå·Î ±¸¼º
-- INDEX BY TABLE (¿¬°ü¹è¿­)
-- Å×ÀÌºíÀ» ÄÃ·³À¸·Î ÀúÀå °¡´É
+ ë ˆì½”ë“œ - ì„œë¡œ ë‹¤ë¥¸ íƒ€ì…ì„ ì‚¬ìš©í•˜ëŠ” í•˜ë‚˜ ì´ìƒì˜ í•„ë“œë¡œ êµ¬ì„±
+- INDEX BY TABLE (ì—°ê´€ë°°ì—´)
+- í…Œì´ë¸”ì„ ì»¬ëŸ¼ìœ¼ë¡œ ì €ì¥ ê°€ëŠ¥
 */
 
 
 /*
-Å×ÀÌºí	: TACCT (°èÁÂÁ¤º¸), TREPAY (»óÈ¯Á¤º¸), TREPAY_PLAN (»óÈ¯°èÈ¹Á¤º¸) »ç¿ë 
-°Ë»ö		: lnact, lnact_seq, 
+í…Œì´ë¸”	: TACCT (ê³„ì¢Œì •ë³´), TREPAY (ìƒí™˜ì •ë³´), TREPAY_PLAN (ìƒí™˜ê³„íšì •ë³´) ì‚¬ìš© 
+ê²€ìƒ‰		: lnact, lnact_seq, 
         ln_dt, ln_amt, 
         dlq_dt, dlq_cnt,
         SUM(trepay_plan.sum_mon_amt), 
         SUM(trepay.sum_mon_amt),
         SUM(trepay_plan.sum_mon_amt) - SUM(trepay.sum_mon_amt)
-Á¶°Ç1	: ´ëÃâ °èÁÂ (tacct.lmt_typ IS NULL)
-Á¶°Ç2	: ¿¬Ã¼ °èÁÂ (tacct.dlq_cnt > 0)
-Á¶°Ç3	: »óÈ¯°èÈ¹ ÀÏÀÚ°¡ ¿À´Ã±îÁö (trepay_plan.pay_dt <= SYSDATE)
-Á¶°Ç4	: »óÈ¯ÀÏÀÚ°¡ ¿À´Â±îÁö (trepay.pay_dt <= SYSDATE)
-±×·ì		: °èÁÂ¹øÈ£(lnact), °èÁÂÀÏ·Ã¹øÈ£(lnact_seq)
-Á¤·Ä		: ¿¬Ã¼±İ¾× ÇÕ°è ±âÁØ ³»¸²Â÷¼ø
+ì¡°ê±´1	: ëŒ€ì¶œ ê³„ì¢Œ (tacct.lmt_typ IS NULL)
+ì¡°ê±´2	: ì—°ì²´ ê³„ì¢Œ (tacct.dlq_cnt > 0)
+ì¡°ê±´3	: ìƒí™˜ê³„íš ì¼ìê°€ ì˜¤ëŠ˜ê¹Œì§€ (trepay_plan.pay_dt <= SYSDATE)
+ì¡°ê±´4	: ìƒí™˜ì¼ìê°€ ì˜¤ëŠ”ê¹Œì§€ (trepay.pay_dt <= SYSDATE)
+ê·¸ë£¹		: ê³„ì¢Œë²ˆí˜¸(lnact), ê³„ì¢Œì¼ë ¨ë²ˆí˜¸(lnact_seq)
+ì •ë ¬		: ì—°ì²´ê¸ˆì•¡ í•©ê³„ ê¸°ì¤€ ë‚´ë¦¼ì°¨ìˆœ
 */
-SELECT TA.LNACT 					AS °èÁÂ¹øÈ£
-       ,TA.LNACT_SEQ 				AS °èÁÂÀÏ·Ã¹øÈ£
-       ,TA.LN_DT     				AS ´ëÃâ½ÃÀÛÀÏÀÚ
-       ,TA.LN_AMT    				AS ´ëÃâ±İ¾×
-       ,TA.DLQ_DT    				AS ¿¬Ã¼½ÃÀÛÀÏÀÚ
-       ,TA.DLQ_CNT   				AS ¿¬Ã¼ÀÏ¼ö
-       ,TP.SUM_PAMT  				AS "ÀÔ±İ°èÈ¹ ÇÕ°è"
-       ,TR.SUM_RAMT  				AS "½ÇÁ¦ÀÔ±İ ÇÕ°è"
-       ,TP.SUM_PAMT - TR.SUM_RAMT AS "¿¬Ã¼±İ¾× ÇÕ°è"
+SELECT TA.LNACT 					AS ê³„ì¢Œë²ˆí˜¸
+       ,TA.LNACT_SEQ 				AS ê³„ì¢Œì¼ë ¨ë²ˆí˜¸
+       ,TA.LN_DT     				AS ëŒ€ì¶œì‹œì‘ì¼ì
+       ,TA.LN_AMT    				AS ëŒ€ì¶œê¸ˆì•¡
+       ,TA.DLQ_DT    				AS ì—°ì²´ì‹œì‘ì¼ì
+       ,TA.DLQ_CNT   				AS ì—°ì²´ì¼ìˆ˜
+       ,TP.SUM_PAMT  				AS "ì…ê¸ˆê³„íš í•©ê³„"
+       ,TR.SUM_RAMT  				AS "ì‹¤ì œì…ê¸ˆ í•©ê³„"
+       ,TP.SUM_PAMT - TR.SUM_RAMT AS "ì—°ì²´ê¸ˆì•¡ í•©ê³„"
 FROM (SELECT *
       FROM TACCT 
       WHERE LMT_TYP IS NULL 
@@ -51,15 +51,15 @@ FROM (SELECT *
 ORDER BY 9 DESC ; 
 
 
-SELECT TACCT.LNACT AS °èÁÂÁ¤º¸,
-       TACCT.LNACT_SEQ AS °èÁÂÀÏ·Ã¹øÈ£, 
-       TACCT.LN_DT AS ´ëÃâ½ÃÀÛÀÏÀÚ,
-       TACCT.LN_AMT AS ´ëÃâ±İ¾×, 
-       TACCT.DLQ_DT AS ¿¬Ã¼½ÃÀÛÀÏÀÚ,
-       TACCT.DLQ_CNT AS ¿¬Ã¼ÀÏ¼ö,
-       SUM(TREPAY_PLAN.SUM_MON_AMT) AS ÀÔ±İ°èÈ¹_ÇÕ, 
-       SUM(TREPAY.SUM_MON_AMT) AS ½ÇÁ¦ÀÔ±İ_ÇÕ,
-       SUM(TREPAY_PLAN.SUM_MON_AMT) - SUM(TREPAY.SUM_MON_AMT) AS ¿¬Ã¼±İ¾×_ÇÕ
+SELECT TACCT.LNACT AS ê³„ì¢Œì •ë³´,
+       TACCT.LNACT_SEQ AS ê³„ì¢Œì¼ë ¨ë²ˆí˜¸, 
+       TACCT.LN_DT AS ëŒ€ì¶œì‹œì‘ì¼ì,
+       TACCT.LN_AMT AS ëŒ€ì¶œê¸ˆì•¡, 
+       TACCT.DLQ_DT AS ì—°ì²´ì‹œì‘ì¼ì,
+       TACCT.DLQ_CNT AS ì—°ì²´ì¼ìˆ˜,
+       SUM(TREPAY_PLAN.SUM_MON_AMT) AS ì…ê¸ˆê³„íš_í•©, 
+       SUM(TREPAY.SUM_MON_AMT) AS ì‹¤ì œì…ê¸ˆ_í•©,
+       SUM(TREPAY_PLAN.SUM_MON_AMT) - SUM(TREPAY.SUM_MON_AMT) AS ì—°ì²´ê¸ˆì•¡_í•©
 FROM TACCT
   LEFT OUTER JOIN TREPAY_PLAN ON TACCT.LNID = TREPAY_PLAN.LNID
   LEFT OUTER JOIN TREPAY ON TACCT.LNID = TREPAY.LNID AND TREPAY_PLAN.PLAN_SEQ = TREPAY.PLAN_SEQ
@@ -76,48 +76,48 @@ WHERE TACCT.LMT_TYP IS NULL
         )
   )
 GROUP BY TACCT.LNACT, TACCT.LNACT_SEQ, TACCT.LN_DT, TACCT.LN_AMT, TACCT.DLQ_DT, TACCT.DLQ_CNT
-ORDER BY ¿¬Ã¼±İ¾×_ÇÕ DESC;
+ORDER BY ì—°ì²´ê¸ˆì•¡_í•© DESC;
 
 
 
 
 
--- ±Ş¿©¸¦ ±âÁØÀ¸·Î 2 °³ÀÇ Çà¸¸ °Ë»ö FETCH 
+-- ê¸‰ì—¬ë¥¼ ê¸°ì¤€ìœ¼ë¡œ 2 ê°œì˜ í–‰ë§Œ ê²€ìƒ‰ FETCH 
 SELECT * 
 FROM emp 
 ORDER BY sal DESC 
 FETCH FIRST 2 ROWS ONLY ;
 
--- µ¿ÀÏÇÑ ±Ş¿©¸¦ ÇÔ²² °Ë»öÇÏ·Á¸é WITH TIES 
+-- ë™ì¼í•œ ê¸‰ì—¬ë¥¼ í•¨ê»˜ ê²€ìƒ‰í•˜ë ¤ë©´ WITH TIES 
 SELECT * 
  FROM emp 
 ORDER BY sal DESC 
 FETCH FIRST 2 ROWS WITH TIES ; 
 
--- Page ´ÜÀ§ Ã³¸®¸¦ ÁøÇàÇÒ °æ¿ì 2 °³ ÇàÀ» °Ç³Ê¶Ù°í ±× ´ÙÀ½ 3 °³ÀÇ ÇàÀ» °Ë»ö, OFFSET
+-- Page ë‹¨ìœ„ ì²˜ë¦¬ë¥¼ ì§„í–‰í•  ê²½ìš° 2 ê°œ í–‰ì„ ê±´ë„ˆë›°ê³  ê·¸ ë‹¤ìŒ 3 ê°œì˜ í–‰ì„ ê²€ìƒ‰, OFFSET
 SELECT * 
  FROM emp 
 ORDER BY sal DESC 
 OFFSET 2 ROWS FETCH FIRST 3 ROWS ONLY ; 
 
--- ¹éºĞÀ²À» ±âÁØÀ¸·Î ÇàÀ» Á¦ÇÑ
+-- ë°±ë¶„ìœ¨ì„ ê¸°ì¤€ìœ¼ë¡œ í–‰ì„ ì œí•œ
 SELECT * 
  FROM emp 
 ORDER BY sal DESC 
-FETCH FIRST 20 PERCENT ROWS ONLY ; -- 20% °¡Á®¿À±â
+FETCH FIRST 20 PERCENT ROWS ONLY ; -- 20% ê°€ì ¸ì˜¤ê¸°
 
 SELECT  DEPTNO, JOB, MGR, SUM(SAL),GROUPING_ID(DEPTNO,JOB,MGR) 
   FROM EMP 
  GROUP BY CUBE(DEPTNO, JOB, MGR) ;
 
 /*
-DEPTNO, JOB ÄÃ·³À¸·Î ±×·ìÈ­µÈ ±Ş¿©ÀÇ ÇÕ°è 
-- DEPTNO ÄÃ·³À¸·Î ±×·ìÈ­µÈ ±Ş¿© ÇÕ°è 
-- ÀüÃ¼ ±Ş¿© ÇÕ°è´Â °Ë»ö ¾ÈÇÔ 
+DEPTNO, JOB ì»¬ëŸ¼ìœ¼ë¡œ ê·¸ë£¹í™”ëœ ê¸‰ì—¬ì˜ í•©ê³„ 
+- DEPTNO ì»¬ëŸ¼ìœ¼ë¡œ ê·¸ë£¹í™”ëœ ê¸‰ì—¬ í•©ê³„ 
+- ì „ì²´ ê¸‰ì—¬ í•©ê³„ëŠ” ê²€ìƒ‰ ì•ˆí•¨ 
 */ 
 SELECT deptno, job, SUM(sal) 
 FROM emp 
-GROUP BY deptno, ROLLUP(job) ;    -- Ç×»ó Âü¿©ÇÒ deptnoÀº µû·Î Àû±â
+GROUP BY deptno, ROLLUP(job) ;    -- í•­ìƒ ì°¸ì—¬í•  deptnoì€ ë”°ë¡œ ì ê¸°
 /*
 GROUP BY A, ROLLUP(B,C), CUBE(D,E)
 (A, B, C, D, E)
@@ -127,9 +127,9 @@ GROUP BY A, ROLLUP(B,C), CUBE(D,E)
 */
 
 /*
-»ç¿ø Á¤º¸¸¦ °Ë»öÇÏ¸é¼­ ¼Ò¼Ó ºÎ¼­ÀÇ ±Ş¿© ÇÕ°è¿Í Æò±Õ ±Ş¿© °Ë»ö 
-- ÀüÃ¼ »ç¿øÀÇ ±Ş¿© ÇÕ°è¿Í Æò±Õ ±Ş¿© °Ë»ö 
-- DEPTNO, EMPNO ±âÁØÀ¸·Î Á¤·Ä 
+ì‚¬ì› ì •ë³´ë¥¼ ê²€ìƒ‰í•˜ë©´ì„œ ì†Œì† ë¶€ì„œì˜ ê¸‰ì—¬ í•©ê³„ì™€ í‰ê·  ê¸‰ì—¬ ê²€ìƒ‰ 
+- ì „ì²´ ì‚¬ì›ì˜ ê¸‰ì—¬ í•©ê³„ì™€ í‰ê·  ê¸‰ì—¬ ê²€ìƒ‰ 
+- DEPTNO, EMPNO ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬ 
 */
 SELECT deptno, empno, 
  DECODE(grouping_id(1,deptno,2,empno), 1,
