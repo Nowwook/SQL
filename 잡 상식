@@ -1,9 +1,17 @@
 WHERE a NOT IN (SELECT a FROM b);
 NOT IN 속 a에 null 값이 있다면 모든 조건이 거짓 = 리턴 안함
 
+
 GROUPING SETS(A,B,C) = GROUP BY A UNION ALL GROUP BY B UNION ALL GROUP BY C
+
 
 별칭시 기존 이름은 안 쓰고 별칭만 씀
 SELECT * 
 FROM EMP E 
 WHERE EMP.SAL > 2000 ;   -- 오류 
+
+
+메인쿼리가 서브쿼리보다 먼저 실행
+
+ROWNUM 은 1, 비교에서 최소(ROWNUM<~) 만 가능
+ROWNUM>2 는 오류 -> 결과에 1행은 무조건 있으니
