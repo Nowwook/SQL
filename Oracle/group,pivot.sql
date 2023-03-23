@@ -69,7 +69,7 @@ select deptno, job, count(*) from emp
 group by grouping sets(deptno, job)
 order by deptno, job;
  
-# deptno, job열의 그룹화 결과 여부를 grouping 함수로 확인
+# deptno, job열의 그룹화 결과 여부를 grouping 함수로 확인 ,참여 안 하면 0 ,참여만큼+1 
 select deptno, job, count(*), max(sal), sum(sal), round(avg(sal),2),
     grouping(deptno),
     grouping(job)
@@ -77,6 +77,11 @@ from emp
 group by cube(deptno, job)
 order by deptno, job;
  
+# grouping_ID(A,B,C)  참여 여부(01 OR 11 OR ...) 을 2진법으로 표현  
+SELECT  DEPTNO, JOB, MGR, SUM(SAL),GROUPING_ID(DEPTNO,JOB,MGR) 
+FROM EMP 
+GROUP BY CUBE(DEPTNO, JOB, MGR) ;
+
 select decode(grouping(deptno), 1, 'all_dept', deptno) as 부서번호,
         decode(grouping(job), 1, 'all_job', job) as 직업,
         count(*), max(sal)
