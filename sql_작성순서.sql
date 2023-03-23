@@ -41,8 +41,6 @@ ORDER BY 9 DESC ;
 /*
 작성순서
 FROM 절 부터 결과를 생각하며 필요조건을 하나씩 실행해보며 작성
-
-SELECT 은 마지막
 */
 
 SELECT * 
@@ -65,4 +63,33 @@ SELECT *
     ON TA.LNACT = TR.LNACT 
    AND TA.LNACT_SEQ = TR.LNACT_SEQ);
 
+-- select 작성
 
+SELECT TA.LNACT 		AS 계좌번호
+       ,TA.LNACT_SEQ 		AS 계좌일련번호
+       ,TA.LN_DT     		AS 대출시작일자
+       ,TA.LN_AMT    		AS 대출금액
+       ,TA.DLQ_DT    		AS 연체시작일자
+       ,TA.DLQ_CNT   		AS 연체일수
+       ,TP.SUM_PAMT  		AS "입금계획 합계"
+       ,TR.SUM_RAMT  		AS "실제입금 합계"
+       ,TP.SUM_PAMT - TR.SUM_RAMT AS "연체금액 합계"
+FROM (SELECT *
+      FROM TACCT 
+      WHERE LMT_TYP IS NULL 
+        AND DLQ_CNT > 0) AS TA 
+  JOIN (SELECT LNACT, LNACT_SEQ
+              ,SUM(SUM_MON_AMT) AS SUM_PAMT 
+        FROM TREPAY_PLAN 
+        WHERE PAY_DT <= SYSDATE 
+        GROUP BY LNACT, LNACT_SEQ) AS TP 
+    ON TA.LNACT = TP.LNACT 
+      AND TA.LNACT_SEQ = TP.LNACT_SEQ 
+  JOIN (SELECT LNACT, LNACT_SEQ
+              ,SUM(SUM_MON_AMT) AS SUM_RAMT 
+        FROM TREPAY
+        WHERE PAY_DT <= SYSDATE 
+        GROUP BY LNACT, LNACT_SEQ) AS TR 
+    ON TA.LNACT = TR.LNACT 
+      AND TA.LNACT_SEQ = TR.LNACT_SEQ 
+ORDER BY 9 DESC ; 
