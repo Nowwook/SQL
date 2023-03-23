@@ -15,3 +15,13 @@ WHERE EMP.SAL > 2000 ;   -- 오류
 
 ROWNUM 은 1, 비교에서 최소(ROWNUM<~) 만 가능
 ROWNUM>2 는 오류 -> 결과에 1행은 무조건 있으니
+
+
+ROLLUP(A,B,C) 이면
+A,B,C
+A,B
+A    까지 해줌
+A,C   CUBE 시
+B,C
+B
+C    까지
