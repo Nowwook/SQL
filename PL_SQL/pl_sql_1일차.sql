@@ -307,18 +307,12 @@ Q1
 조건4	: 'AA' 등급 (tcredit.code = '03') 
 정렬		: 계좌번호(lnact), 계좌일련번호(lnact_seq) 기준 오름차순 
 LNID 으로 조인
-Q2
-'AA' 등급의 평가를 받고 2000년 이후 설립된 법인 차주가 개설한 대출 계좌 정보를 검색하세요.
-테이블	: TACCT (계좌정보), TID (차주정보), TCREDIT (신용등급정보) 사용 
-검색		: lnact, lnact_seq, branch, lnid, ln_dt, exp_dt, ln_amt
-조건1	: 대출 계좌 (tacct.lmt_typ IS NULL)
-조건2	: 2000년 이후 설립된 차주 (tid.bthday >= TO_DATE('2000/01/01','YYYY/MM/DD'))
-조건3	: 'AA' 등급 (tcredit.code = '03') 
-정렬		: 계좌번호(lnact), 계좌일련번호(lnact_seq) 기준 오름차순 
+
 */
 
---Q1
-SELECT TACCT.LNACT, 
+-- 일반적인 풀이, 중복제거,조인 느림
+SELECT DISTINCT
+      TACCT.LNACT, 
       TACCT.LNACT_SEQ, 
       TACCT.BRANCH, 
       TACCT.LNID, 
@@ -326,26 +320,32 @@ SELECT TACCT.LNACT,
       TACCT.EXP_DT, 
       TACCT.LN_AMT
 FROM TCREDIT, TID, TACCT
-WHERE TCREDIT.LNID = TID.LNID
-  AND TID.LNID = TACCT.LNID
+WHERE TCREDIT.LNID = TID.LNID AND TID.LNID = TACCT.LNID
   AND TACCT.LMT_TYP IS NULL
   AND TID.BTHDAY >= TO_DATE('2000/01/01','YYYY/MM/DD')
   AND TCREDIT.ACODE = '01'
   AND TCREDIT.CODE = '03'
 ORDER BY LNACT, LNACT_SEQ;
 
---Q2
-SELECT TACCT.LNACT, 
-      TACCT.LNACT_SEQ, 
-      TACCT.BRANCH, 
-      TACCT.LNID, 
-      TACCT.LN_DT, 
-      TACCT.EXP_DT, 
-      TACCT.LN_AMT
-FROM TCREDIT, TID, TACCT
-WHERE TCREDIT.LNID = TID.LNID
-  AND TID.LNID = TACCT.LNID
-  AND TACCT.LMT_TYP IS NULL
-  AND TID.BTHDAY >= TO_DATE('2000/01/01','YYYY/MM/DD')
-  AND TCREDIT.CODE = '03'
-ORDER BY LNACT, LNACT_SEQ;
+-- 서브쿼리 사용, 좀 더 정확
+SELECT LNACT, LNACT_SEQ, BRANCH, LNID, LN_DT, EXP_DT, LN_AMT
+  FROM TACCT 
+ WHERE LMT_TYP IS NULL
+   AND LNID IN (SELECT LNID 
+                  FROM TID 
+                 WHERE BTHDAY >= TO_DATE('2000/01/01','YYYY/MM/DD')
+                   AND LNID IN (SELECT LNID 
+                                  FROM TCREDIT 
+                                 WHERE ACODE = '01' 
+                                   AND CODE  = '03')) 
+ORDER BY LNACT, LNACT_SEQ ;
+
+
+-- 조인 (중복 제거 필요)
+SELECT DISTINCT D.* 
+  FROM EMP E, DEPT D 
+ WHERE E.DEPTNO = D.DEPTNO ; 
+-- 서브쿼리
+SELECT *
+  FROM DEPT 
+ WHERE DEPTNO IN (SELECT DEPTNO FROM EMP) ;
