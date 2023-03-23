@@ -310,7 +310,7 @@ LNID 으로 조인
 
 */
 
--- 일반적인 풀이, 중복제거,조인 느림
+-- 일반적인 풀이, 조인은 중복제거 필요
 SELECT DISTINCT
       TACCT.LNACT, 
       TACCT.LNACT_SEQ, 
