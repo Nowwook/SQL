@@ -560,9 +560,9 @@ VALUES('Eleanor', 'Beh', 30, 'eleanor@test.com', sysdate, 'SA_REP');
 EXECUTE IMMEDIATE
 */
 CREATE OR REPLACE PROCEDURE rename_col 
-( p_tab_name	VARCHAR2, 
- p_old_name	VARCHAR2,
- p_new_name	VARCHAR2 ) IS 
+  ( p_tab_name	VARCHAR2, 
+   p_old_name	VARCHAR2,
+   p_new_name	VARCHAR2 ) IS 
 BEGIN 
  EXECUTE IMMEDIATE 
   'ALTER TABLE ' || p_tab_name || ' RENAME COLUMN ' || p_old_name || ' TO ' || p_new_name;
