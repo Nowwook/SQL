@@ -4,6 +4,8 @@ NOT IN 속 a에 null 값이 있다면 모든 조건이 거짓 = 리턴 안함
 
 GROUPING SETS(A,B,C) = GROUP BY A UNION ALL GROUP BY B UNION ALL GROUP BY C
 
+문자형 숫자를 정렬
+order by to_number(문자);
 
 별칭시 기존 이름은 안 쓰고 별칭만 씀
 SELECT * 
