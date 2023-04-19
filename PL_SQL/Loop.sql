@@ -1,3 +1,4 @@
+/*
 범위에 null 불가
 LOOP 적어도 1번은 실행
 WHILE 조건 LOOP 
