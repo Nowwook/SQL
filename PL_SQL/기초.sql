@@ -61,7 +61,9 @@ variable 이름1 varchar2(30);        -- 결과 받을 변수 선언
 EXECUTE Procedure_이름(10, :이름1);  -- 실행
 PRINT 이름1;    -- 확인
 
-
+VAR 이름1 REFCURSOR;
+EXEC Procedure_이름('변수', :이름1);
+PRINT 이름1;
 
 /*
 USER DEFINED FUNCTION
