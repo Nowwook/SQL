@@ -23,6 +23,7 @@ END (실행문 종료)  (필수)
 PL/SQL 블록은 행에 '/'가 있으면 종결된것으로 간주
 
 DBMS_OUTPUT.PUT_LINE(화면에 출력할 내용)
+set serveroutput on;  - DBMS_OUTPUT 가능하게
 
 OR REPLACE 
   데이터베이스 내에 같은 이름의 프로시저가 있을 경우, 새로운 내용으로 덮어쓰기
