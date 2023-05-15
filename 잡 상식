@@ -27,3 +27,18 @@ A,C   CUBE 시
 B,C
 B
 C    까지
+
+&등과 같은 특수문자 입력
+1. 아스키코드 값 추출
+  select ascii('&') from dual;
+  아스키코드 값 입력
+  'a' || ch(38) || 'b'
+2. DEFINE OFF 
+  SET DEFINE OFF를 하게되면 [대체 변수 입력] 프롬프트가 뜨지 않게 된다.
+  set define off
+  set define on
+3. ESCAPE ON 
+  ESCAPE ON을 하고 역슬래쉬(\)를 특수문자 앞에 붙히면 입력할 수 있게 된다.
+  set escape on
+  'a\&b'
+  set escape off
