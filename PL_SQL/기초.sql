@@ -27,6 +27,9 @@ set serveroutput on;  - DBMS_OUTPUT 가능하게
 
 OR REPLACE 
   데이터베이스 내에 같은 이름의 프로시저가 있을 경우, 새로운 내용으로 덮어쓰기
+
+삭제
+DROP PROCEDURE 이름
 */
 
 
