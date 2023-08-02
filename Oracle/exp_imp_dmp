@@ -1,0 +1,61 @@
+exp
+1. 관리자(SYSTEM) 계정으로 전체 데이터 베이스 백업
+
+exp userid=SYSTEM/패스워드 FULL=y FILE=백업할경로및파일명
+
+예) exp userid=SYSTEM/패스워드 FULL=y FILE=C:\backup\db.dump
+
+ 
+
+2. 관리자(SYSTEM) 계정으로 다른 계정의 스키마 전체 백업
+
+exp userid=SYSTEM/패스워드 OWNER=사용자명 FILE=백업할경로및파일명
+
+예) exp userid=SYSTEM/1234 OWNER=user FILE=C:\backup\test.dump
+
+ 
+
+3. 일반 계정으로 자신의 전체 스키마 백업
+
+exp userid=사용자명/패스워드 FILE=백업할경로및파일명
+
+예) exp userid=user/1234 FILE=C:\backup\schema.dump
+
+ 
+
+4. 일반 계정으로 특정 테이블 백업
+
+exp userid=사용자명/패스워드 FILE=백업할경로및파일 TABLES=(테이블명1, 테이블명2 ...)
+예) exp userid=user/1234 FILE=C:\backup\usertable.dump TABLIES=(usertable)
+
+ 
+
+imp
+
+1. 관리자(SYSTEM) 계정으로 전체 데이터 베이스 복원
+
+imp userid=SYSTEM/패스워드 FILE=백업된경로및파일명
+
+ 
+
+2. 관리자(SYSTEM) 계정으로 다른 계정의 스키마 전체 복원
+
+imp userid=SYSTEM/패스워드 FROMUSER=사용자명 TOUSER=사용자명 FILE=백업된경로및파일명
+
+ 
+
+3. 일반 계정으로 자신의 전체 스키마 복원
+
+imp userid=사용자명/패스워드 FILE=백업된경로및파일명
+
+ 
+
+4. 일반 계정으로 특정 테이블 복원
+
+imp userid=사용자명/패스워드 FILE=백업된경로및파일명 TABLES=(테이블명1, 테이블명2 ...)
+
+ 
+
+5. 관리자(SYSTEM) 계정으로 A계정의 스키마를 B계정의 스키마로 특정 테이블만 복원
+
+imp userid=SYSTEM/패스워드 FROMUSER=A계정 TOUSER=B계정 FILE=백업된경로및파일명 TABLES=(테이블명1, 테이블명2 ...)
