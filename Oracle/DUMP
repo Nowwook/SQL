@@ -7,6 +7,9 @@ FROM
 디렉토리 위치 
 select * from dba_directories;
 
+디렉토리 읽,쓰기 권한 주기
+GRANT READ,WRITE ON DIRECTORY 디렉토리명 TO 권한줄계정;
+
 expdp
 expdp 아이디/비번@아이피주소(필요시)/서비스이름 schemas=스키마명 directory=디렉토리명 dumpfile= 원하는덤프파일명.dmp logfile= 원하는로그파일명.log
 
