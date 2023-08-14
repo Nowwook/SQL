@@ -13,6 +13,9 @@ GRANT READ,WRITE ON DIRECTORY 디렉토리명 TO 권한줄계정;
 expdp
 expdp 아이디/비번@아이피주소(필요시)/서비스이름 schemas=스키마명 directory=디렉토리명 dumpfile= 원하는덤프파일명.dmp logfile= 원하는로그파일명.log
 
+expdp [사용자이름]/[사용자비밀번호] dumpfile=[파일이름].dmp schemas=[스키마이름]
+impdp [사용자이름]/[사용자비밀번호] dumpfile=[파일이름].dmp table_exists_action=replace
+
 exp
 1. 관리자(SYSTEM) 계정으로 전체 데이터 베이스 백업
 
