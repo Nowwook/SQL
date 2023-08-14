@@ -1,3 +1,15 @@
+현재 스키마 이름
+SELECT
+   SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS "CURRENT_SCHEMA"
+FROM
+   DUAL;
+
+디렉토리 위치 
+select * from dba_directories;
+
+expdp
+expdp 아이디/비번@아이피주소(필요시)/서비스이름 schemas=스키마명 directory=디렉토리명 dumpfile= 원하는덤프파일명.dmp logfile= 원하는로그파일명.log
+
 exp
 1. 관리자(SYSTEM) 계정으로 전체 데이터 베이스 백업
 
