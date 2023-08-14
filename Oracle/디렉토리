@@ -1,0 +1,24 @@
+디렉토리 조회 
+select * from dba_directories;
+
+디렉토리 생성
+create directory 디렉토리이름 as 'C:\DUMP';
+sys나 system 가 아닌 계정이 directory를 생성하려면 create any directory 권한 필요
+주는 방법 : grant create any directory to 계정이름;
+
+디렉토리 변경(OS위치 변경)
+create or replace directory 디렉토리이름 as 'C:\DUMP2';
+
+디렉토리 권한 부여
+grant read,write on directory 디렉토리이름 to 계정이름;
+디렉토리를 다른 유저가 사용하려면 권한 필요
+
+디렉토리 권한 제거
+revoke read,write on directory 디렉토리이름 from 계정이름;
+
+디렉토리 삭제
+drop directory 디렉토리이름;
+삭제할 때도 sys, system 유저가 아닌 일반유저가 삭제하려면 drop any directory 권한 필요
+주는 방법 : grant drop any directory to 계정이름;
+
+추천 방법 : sys as sysdba로 접근 후 디렉토리를 생성, 사용자에게 디렉토리 사용 권한을 부여
