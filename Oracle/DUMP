@@ -47,3 +47,7 @@ expdp 아이디/비번@localhost:1521/orcl schemas=스키마이름(아이디) di
 
 
 impdp 아이디/비번@localhost:1521/orcl schemas=스키마이름(아이디) directory=DATA_PUMP_DIR dumpfile= 덤프이름.dmp logfile= 로그이름.log
+
+
+@ 임포트 시 스키마 못 찾을 시
+schemas=기존스키마 remap_schema=기존스키마:넣을스키마
