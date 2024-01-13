@@ -53,3 +53,6 @@ impdp 아이디/비번@localhost:1521/orcl schemas=스키마이름(아이디) di
 impdp 에 
 schemas=기존스키마 remap_schema=기존스키마:넣을스키마
 추가
+
+@ 테이블 구조만 백업
+rows=n 
