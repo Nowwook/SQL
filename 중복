@@ -1,0 +1,55 @@
+WITH all_values AS (
+    SELECT t1 AS value FROM A
+    UNION ALL
+    SELECT t2 AS value FROM A
+    UNION ALL
+    SELECT t3 AS value FROM A
+),
+duplicate_values AS (
+    SELECT value
+    FROM all_values
+    GROUP BY value
+    HAVING COUNT(*) > 1
+)
+SELECT L, dt, 't1' AS column_name, t1 AS duplicate_value
+FROM A
+WHERE t1 IN (SELECT value FROM duplicate_values)
+UNION ALL
+SELECT L, dt, 't2' AS column_name, t2 AS duplicate_value
+FROM A
+WHERE t2 IN (SELECT value FROM duplicate_values)
+UNION ALL
+SELECT L, dt, 't3' AS column_name, t3 AS duplicate_value
+FROM A
+WHERE t3 IN (SELECT value FROM duplicate_values)
+ORDER BY L, dt, column_name;
+
+
+WITH t1_duplicates AS (
+    SELECT t1
+    FROM A
+    GROUP BY t1
+    HAVING COUNT(*) > 1
+), t2_duplicates AS (
+    SELECT t2
+    FROM A
+    GROUP BY t2
+    HAVING COUNT(*) > 1
+), t3_duplicates AS (
+    SELECT t3
+    FROM A
+    GROUP BY t3
+    HAVING COUNT(*) > 1
+)
+SELECT L, dt, 't1' AS column_name, t1 AS duplicate_value
+FROM A
+WHERE t1 IN (SELECT t1 FROM t1_duplicates)
+UNION ALL
+SELECT L, dt, 't2' AS column_name, t2 AS duplicate_value
+FROM A
+WHERE t2 IN (SELECT t2 FROM t2_duplicates)
+UNION ALL
+SELECT L, dt, 't3' AS column_name, t3 AS duplicate_value
+FROM A
+WHERE t3 IN (SELECT t3 FROM t3_duplicates)
+ORDER BY L, dt, column_name;
