@@ -76,3 +76,23 @@ JOIN (
 ) t2 ON t1.a = t2.a
 ORDER BY t1.a;
 
+
+
+WITH all_values AS (
+    SELECT t1 AS value, L, dt, 't1' AS column_name FROM A
+    UNION ALL
+    SELECT t2 AS value, L, dt, 't2' AS column_name FROM A
+    UNION ALL
+    SELECT t3 AS value, L, dt, 't3' AS column_name FROM A
+),
+duplicate_values AS (
+    SELECT value
+    FROM all_values
+    GROUP BY value
+    HAVING COUNT(*) > 1
+)
+SELECT L, dt, column_name, value AS duplicate_value
+FROM all_values
+WHERE value IN (SELECT value FROM duplicate_values)
+ORDER BY L, dt, column_name;
+
