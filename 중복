@@ -53,3 +53,26 @@ SELECT L, dt, 't3' AS column_name, t3 AS duplicate_value
 FROM A
 WHERE t3 IN (SELECT t3 FROM t3_duplicates)
 ORDER BY L, dt, column_name;
+
+
+WITH your_table AS (
+    SELECT
+        (m + n + l) AS a,
+        b, c, d
+    FROM (
+        -- 여기에 원래의 서브쿼리를 넣습니다
+        SELECT m, n, l, b, c, d
+        FROM some_other_table
+        WHERE some_condition
+    )
+)
+SELECT t1.a, t1.b, t1.c, t1.d
+FROM your_table t1
+JOIN (
+    SELECT a
+    FROM your_table
+    GROUP BY a
+    HAVING COUNT(*) > 1
+) t2 ON t1.a = t2.a
+ORDER BY t1.a;
+
