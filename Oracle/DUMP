@@ -1,3 +1,8 @@
+--기존방식
+EXP 아이디/비번@localhost/orcl FILE=C:\Users\Administrator\덤프이름.DMP COMPRESS=Y STATISTICS=NONE
+IMP 아이디/비번@localhost/orcl FILE=C:\Users\Administrator\덤프이름.DMP IGNORE=Y COMMIT=Y FULL=Y
+
+
 --현재 스키마 명
 SELECT
    SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS "CURRENT_SCHEMA"
