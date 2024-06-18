@@ -2,6 +2,12 @@
 EXP 아이디/비번@localhost/orcl FILE=C:\Users\Administrator\덤프이름.DMP COMPRESS=Y STATISTICS=NONE
 IMP 아이디/비번@localhost/orcl FILE=C:\Users\Administrator\덤프이름.DMP IGNORE=Y COMMIT=Y FULL=Y
 
+COMPRESS=Y:      데이터를 압축해서 익스포트
+STATISTICS=NONE: 통계 정보(데이터베이스 옵티마이저(쿼리 실행 계획 생성)에 사용) 를 익스포트하지 않음, 시간을 절약 가능, 데이터베이스 성능에 영향을 줄 수 있음
+IGNORE=Y:    임포트 시 오류가 발생해도 무시하고 계속 진행
+COMMIT=Y:    임포트 작업 완료 후 커밋을 실행
+FULL=Y:      전체 스키마나 테이블을 포함하여 모든 데이터를 익스포트
+
 
 --현재 스키마 명
 SELECT
