@@ -1,0 +1,59 @@
+1. tnsnames.ora 파일
+tnsnames.ora 파일은 클라이언트 측에서 사용됩니다. 이 파일은 클라이언트가 데이터베이스에 연결할 때 필요한 네트워크 서비스 이름과 연결 정보를 저장합니다.
+
+파일 위치: 보통 ORACLE_HOME/network/admin/ 디렉토리에 위치합니다.
+주요 내용: 데이터베이스 서비스에 대한 별칭과 연결 정보(호스트명, 포트, 서비스 이름 등)를 포함합니다.
+
+ORCL =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = mydbhost.example.com)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      (SERVICE_NAME = orcl.example.com)
+    )
+  )
+
+ORCL: 데이터베이스 연결에 사용할 별칭입니다.
+HOST: 데이터베이스가 실행 중인 서버의 호스트명 또는 IP 주소입니다.
+PORT: 데이터베이스가 리스닝하고 있는 포트 번호입니다(기본값은 1521).
+SERVICE_NAME: 데이터베이스 서비스 이름입니다.
+클라이언트가 ORCL이라는 별칭을 사용해 연결을 시도할 때, 이 정보가 사용됩니다.
+
+
+
+
+
+2. listener.ora 파일
+listener.ora 파일은 서버 측에서 사용되며, Oracle Listener 프로세스가 어떤 포트에서 어떤 데이터베이스 서비스를 리스닝하고 있는지를 정의합니다. Listener는 클라이언트의 연결 요청을 수신하고, 이를 적절한 데이터베이스 인스턴스로 연결해주는 역할을 합니다.
+
+파일 위치: 보통 ORACLE_HOME/network/admin/ 디렉토리에 위치합니다.
+주요 내용: Listener의 프로토콜, 호스트, 포트, 서비스 이름 등을 정의합니다.
+
+LISTENER =
+  (DESCRIPTION_LIST =
+    (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = mydbhost.example.com)(PORT = 1521))
+    )
+  )
+
+SID_LIST_LISTENER =
+  (SID_LIST =
+    (SID_DESC =
+      (GLOBAL_DBNAME = orcl.example.com)
+      (ORACLE_HOME = /u01/app/oracle/product/19.0.0/dbhome_1)
+      (SID_NAME = orcl)
+    )
+  )
+
+LISTENER: Listener의 이름입니다(일반적으로 LISTENER).
+PROTOCOL: 사용되는 프로토콜(일반적으로 TCP)입니다.
+HOST: Listener가 리스닝할 호스트의 주소입니다.
+PORT: Listener가 리스닝할 포트 번호입니다.
+SID_LIST: 데이터베이스 인스턴스(SID) 목록입니다.
+SID_NAME: 데이터베이스 인스턴스의 고유 식별자입니다.
+이 설정은 Listener가 mydbhost.example.com의 1521 포트에서 orcl이라는 SID를 가진 데이터베이스 인스턴스에 대한 연결 요청을 수신하도록 합니다.
+
+요약
+tnsnames.ora: 클라이언트 측 설정 파일로, 데이터베이스 서비스에 대한 연결 정보를 포함합니다.
+listener.ora: 서버 측 설정 파일로, Oracle Listener가 연결 요청을 처리할 네트워크 서비스에 대한 정보를 정의합니다.
