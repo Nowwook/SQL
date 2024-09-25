@@ -1,0 +1,8 @@
+SET ANSI_NULLS ON
+  - NULL 값 비교를 처리
+  
+SET QUOTED_IDENTIFIER ON
+  - 따옴표("")로 묶인 식별자를 허용하고, 이를 대소문자 구분 없이 처리
+
+SET NOCOUNT ON; 
+  - 쓸모없는 결과 집합 출력을 방지
