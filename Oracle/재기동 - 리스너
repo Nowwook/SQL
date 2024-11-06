@@ -1,0 +1,13 @@
+CMD 관리자 권한
+
+lsnrctl stop
+
+sqlplus "/as sysdba" sysdba
+
+shutdown immediate
+
+startup
+
+quit
+
+lsnrctl start
