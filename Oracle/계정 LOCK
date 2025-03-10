@@ -1,0 +1,5 @@
+sqlplus sys/oracle as sysdba
+
+SELECT USERNAME, ACCOUNT_STATUS FROM DBA_USERS WHERE USERNAME = '계정 이름';
+
+ALTER USER 계정 이름 ACCOUNT UNLOCK;
