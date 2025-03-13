@@ -67,3 +67,6 @@ schemas=기존스키마 remap_schema=기존스키마:넣을스키마
 
 @ 테이블 구조만 백업
 rows=n 
+
+@ 계정 삭제
+DROP USER 이름 CASCADE;
